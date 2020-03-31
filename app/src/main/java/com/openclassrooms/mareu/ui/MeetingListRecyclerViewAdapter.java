@@ -23,10 +23,10 @@ import java.util.List;
  **/
 public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingListRecyclerViewAdapter.ViewHolder> {
 
-    private List<Meeting> mMeetingList;
+    private final List<Meeting> mMeetingList;
 
-    public MeetingListRecyclerViewAdapter(List<Meeting> mMeetingList){
-        this.mMeetingList = mMeetingList;
+    public MeetingListRecyclerViewAdapter(List<Meeting> MeetingList){
+        mMeetingList = MeetingList;
     }
 
 
@@ -47,7 +47,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     @Override
     public int getItemCount() {
-        return this.mMeetingList.size();
+        return mMeetingList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
