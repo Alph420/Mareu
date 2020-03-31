@@ -9,7 +9,17 @@ import java.util.List;
  **/
 public class Meeting {
 
-    private String title;
+
+    private int color;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
 
     private Date date;
 
@@ -19,13 +29,6 @@ public class Meeting {
 
     private List<String> participantsList;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public Date getDate() {
         return date;
@@ -60,9 +63,12 @@ public class Meeting {
     }
 
 
+    public String getInfo(){
+        return this.getRoom() + this.getDate() + this.getSujet();
+    }
 
-    public Meeting(String title, Date date, String room, String sujet, List<String> participantsList) {
-        this.title = title;
+    public Meeting(int color, Date date, String room, String sujet, List<String> participantsList) {
+        this.color = color;
         this.date = date;
         this.room = room;
         this.sujet = sujet;

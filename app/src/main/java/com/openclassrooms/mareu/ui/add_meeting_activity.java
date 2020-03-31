@@ -15,7 +15,6 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -39,10 +38,13 @@ MeetingApiService mApiService;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting_activity);
 
-        mImageView = findViewById(R.id.color_meeting);
-        mImageView.setBackgroundColor( rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255)));
+       final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
 
-        mTitleMeeting = findViewById(R.id.title_meeting);
+        mImageView = findViewById(R.id.color_meeting);
+        mImageView.setBackgroundColor(color);
+
+
+         int mBackground = mImageView.getDrawingCacheBackgroundColor();
         mDateMeeting = findViewById(R.id.date_meeting);
         mLocationMeeting = findViewById(R.id.location_meeting);
         mSujet_meeting = findViewById(R.id.sujet_meeting);
@@ -73,7 +75,7 @@ MeetingApiService mApiService;
                     participantListMeeting.add(participant);
                 }
 
-                Meeting meeting = new Meeting(mTitleMeeting.getText().toString(),date,mLocationMeeting.getText().toString(),mSujet_meeting.getText().toString(),participantListMeeting);
+                Meeting meeting = new Meeting(color,date,mLocationMeeting.getText().toString(),mSujet_meeting.getText().toString(),participantListMeeting);
                 mApiService.createMeeting(meeting);
             }
         });
