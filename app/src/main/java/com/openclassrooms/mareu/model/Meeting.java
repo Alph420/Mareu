@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Alph4 le 26/03/2020.
  * Projet: Mareu
  **/
-public class meeting {
+public class Meeting {
 
     private String title;
 
@@ -61,7 +61,7 @@ public class meeting {
 
 
 
-    public meeting(String title, Date date, String room, String sujet, List<String> participantsList) {
+    public Meeting(String title, Date date, String room, String sujet, List<String> participantsList) {
         this.title = title;
         this.date = date;
         this.room = room;

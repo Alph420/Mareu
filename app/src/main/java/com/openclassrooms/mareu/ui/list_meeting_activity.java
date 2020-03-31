@@ -5,18 +5,25 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.openclassrooms.mareu.R;
-import com.openclassrooms.mareu.ui.add_meeting_activity;
+import com.openclassrooms.mareu.di.DI;
+import com.openclassrooms.mareu.model.Meeting;
+import com.openclassrooms.mareu.service.DummyMeetingApiService;
+import com.openclassrooms.mareu.service.DummyMeetingGenerator;
+import com.openclassrooms.mareu.service.MeetingApiService;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 public class list_meeting_activity extends AppCompatActivity {
 
     FloatingActionButton mFloatingActionButton;
+
+
+    MeetingApiService mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,16 @@ public class list_meeting_activity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mApiService = DI.getNeighbourApiService();
 
+
+        ArrayAdapter<Meeting> adapter = new ArrayAdapter<Meeting>(this,
+                android.R.layout.simple_dropdown_item_1line, mApiService.getMeeting());
+
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                findViewById(R.id.meeting_list);
+
+        textView.setAdapter(adapter);
 
         mFloatingActionButton = findViewById(R.id.add_meeting);
 
@@ -38,25 +54,4 @@ public class list_meeting_activity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_filter) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

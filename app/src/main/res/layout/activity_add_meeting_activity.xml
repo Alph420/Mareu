@@ -11,10 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="25dp"
         android:layout_marginEnd="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/color_meeting"
@@ -22,20 +24,120 @@
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorBlue"
             />
+
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/title_meeting"
+            android:id="@+id/title_meetingLyt"
             android:layout_width="300dp"
-            android:layout_height="20dp"
+            android:layout_height="50dp"
             android:layout_marginTop="25dp"
-
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorRed"
+            >
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/title_meeting"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="Titre"
+                android:inputType="textMultiLine" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date_meetingLyt"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            >
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/date_meeting"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="Date"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/location_meetingLyt"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/location_meeting"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="Lieu"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sujet_meetingLyt"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/sujet_meeting"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="Sujet"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/participantLyt"
+            android:layout_width="300dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/participant"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:ems="10"
+                android:hint="Participants"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Save"
+            android:background="@color/colorCyanBlue"
             />
-
 
     </LinearLayout>
 
