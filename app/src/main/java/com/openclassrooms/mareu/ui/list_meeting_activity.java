@@ -1,5 +1,6 @@
 package com.openclassrooms.mareu.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,11 +12,11 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import java.util.List;
 
@@ -40,10 +41,10 @@ public class list_meeting_activity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
 
-
-
+        initList();
 
         mFloatingActionButton = findViewById(R.id.add_meeting);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,11 @@ public class list_meeting_activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initList() {
+        mMeeting = mApiService.getMeeting();
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
     }
 
 }

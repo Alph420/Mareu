@@ -35,16 +35,13 @@
             android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
             >
-            <androidx.appcompat.widget.AppCompatEditText
+
+            <TimePicker
                 android:id="@+id/date_meeting"
-                android:layout_width="300dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:ems="10"
-                android:hint="Date"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:minLines="4" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
 

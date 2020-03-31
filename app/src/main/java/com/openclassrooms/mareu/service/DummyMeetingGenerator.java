@@ -5,7 +5,6 @@ import com.openclassrooms.mareu.model.ParticipantsGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -17,14 +16,15 @@ import static android.graphics.Color.rgb;
  **/
 public class DummyMeetingGenerator{
 
-   private static Date date = new Date();
+   private static int hoursMeeting = 14;
+
    private static List<String> mStringList = ParticipantsGenerator.adressGenerator();
    public static final int  color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
 
 
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(color,date,"Salle test","Test",mStringList)
+            new Meeting(color, hoursMeeting,"Salle test","Test",mStringList)
 
 
     );
