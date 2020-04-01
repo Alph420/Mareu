@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,6 +24,7 @@
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
+
             />
 
 
@@ -31,16 +32,18 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/date_meetingLyt"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
             >
 
             <TimePicker
                 android:id="@+id/date_meeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:timePickerMode="spinner"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,18 +51,20 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/location_meetingLyt"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="80dp"
             android:layout_marginTop="25dp"
             android:layout_gravity="center_horizontal"
+            style="@style/LayoutStyle"
+
             >
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/location_meeting"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:ems="10"
-                android:hint="Lieu"
+                android:hint="Salle"
                 android:inputType="textMultiLine"
                 android:lines="4"
                 android:minLines="4" />
@@ -69,15 +74,17 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sujet_meetingLyt"
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
+            style="@style/LayoutStyle"
+
             >
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/sujet_meeting"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:ems="10"
                 android:hint="Sujet"
@@ -91,8 +98,9 @@
             android:id="@+id/participantLyt"
             android:layout_width="300dp"
             android:layout_height="160dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
+            style="@style/LayoutStyle"
             >
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -113,7 +121,7 @@
             android:id="@+id/save_meeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:text="Save"
             android:background="@color/colorCyanBlue"

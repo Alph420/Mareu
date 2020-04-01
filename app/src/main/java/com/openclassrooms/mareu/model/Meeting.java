@@ -52,8 +52,11 @@ public class Meeting {
         this.sujet = sujet;
     }
 
-    public List<String> getParticipantsList() {
-        return participantsList;
+    public String getParticipantsList() {
+        for (String participants : participantsList) {
+            return participants + ", ";
+        }
+        return null;
     }
 
     public void setParticipantsList(List<String> participantsList) {
@@ -62,7 +65,7 @@ public class Meeting {
 
 
     public String getInfo(){
-        return this.getRoom() + this.getHoursMeeting() + this.getSujet();
+        return this.getRoom() + " - " + this.getHoursMeeting() +" - "+ this.getSujet();
     }
 
     public Meeting(int color, int hourMeeting, String room, String sujet, List<String> participantsList) {

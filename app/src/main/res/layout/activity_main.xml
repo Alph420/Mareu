@@ -20,16 +20,17 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/meeting_list"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:listitem="@layout/meeting_item"
-    >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/meeting_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        tools:listitem="@layout/meeting_item"
+
+        >
 
 
-</androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

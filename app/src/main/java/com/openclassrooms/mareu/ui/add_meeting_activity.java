@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import com.openclassrooms.mareu.R;
+import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.model.Meeting;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
@@ -38,11 +39,14 @@ final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Ra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting_activity);
 
+        mApiService = DI.getNeighbourApiService();
+
 
         mImageView = findViewById(R.id.color_meeting);
         mImageView.setBackgroundColor(color);
 
         mDateMeeting = findViewById(R.id.date_meeting);
+        mDateMeeting.setIs24HourView(true);
         mLocationMeeting = findViewById(R.id.location_meeting);
         mSujet_meeting = findViewById(R.id.sujet_meeting);
         mParticipant = findViewById(R.id.participant);
@@ -67,6 +71,7 @@ final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Ra
 
                 Meeting meeting = new Meeting(color,meetingTime,mLocationMeeting.getText().toString(),mSujet_meeting.getText().toString(),participantListMeeting);
                 mApiService.createMeeting(meeting);
+                finish();
             }
         });
     }

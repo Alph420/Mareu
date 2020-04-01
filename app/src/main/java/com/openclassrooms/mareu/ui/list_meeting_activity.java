@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
+import com.openclassrooms.mareu.events.DeleteMeetingEvent;
 import com.openclassrooms.mareu.model.Meeting;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
@@ -16,7 +17,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.SystemClock;
 import android.view.View;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -38,7 +43,6 @@ public class list_meeting_activity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.meeting_list);
 
-        mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
@@ -59,6 +63,33 @@ public class list_meeting_activity extends AppCompatActivity {
     private void initList() {
         mMeeting = mApiService.getMeeting();
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("Resume");
+        initList();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("Start");
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        System.out.println("Stop");
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onDeleteMeetingEvent(DeleteMeetingEvent event){
+        mApiService.deleteMeeting(event.meeting);
+        initList();
     }
 
 }

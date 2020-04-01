@@ -1,6 +1,6 @@
 package com.openclassrooms.mareu.ui;
 
-import android.content.Context;
+import org.greenrobot.eventbus.EventBus;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import com.openclassrooms.mareu.R;
+import com.openclassrooms.mareu.events.DeleteMeetingEvent;
 import com.openclassrooms.mareu.model.Meeting;
 
 import java.util.List;
@@ -39,10 +40,19 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Meeting meeting = mMeetingList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        final Meeting meeting = mMeetingList.get(position);
         holder.mMeetingColor.setBackgroundColor(meeting.getColor());
         holder.mMeetingInfo.setText(meeting.getInfo());
+        holder.mMeetingParticipants.setText(meeting.getParticipantsList());
+
+        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+
+            }
+        });
     }
 
     @Override
@@ -57,6 +67,8 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         public TextView mMeetingInfo;
         @BindView(R.id.item_list_delete_button)
         public ImageButton mDeleteButton;
+        @BindView(R.id.item_list_participants)
+        public TextView mMeetingParticipants;
 
 
         public ViewHolder(View view ) {

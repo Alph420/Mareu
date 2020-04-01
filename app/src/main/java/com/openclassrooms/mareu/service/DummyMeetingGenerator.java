@@ -14,7 +14,7 @@ import static android.graphics.Color.rgb;
  * Created by Alph4 le 26/03/2020.
  * Projet: Mareu
  **/
-public class DummyMeetingGenerator{
+public abstract class DummyMeetingGenerator{
 
    private static int hoursMeeting = 14;
 
@@ -24,7 +24,10 @@ public class DummyMeetingGenerator{
 
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(color, hoursMeeting,"Salle test","Test",mStringList)
+            new Meeting(color, hoursMeeting,"Salle test 1","Sujet",mStringList),
+            new Meeting(color, hoursMeeting,"Salle test 2","Sujet",mStringList),
+            new Meeting(color, hoursMeeting,"Salle test 3","Sujet",mStringList),
+            new Meeting(color, hoursMeeting,"Salle test 4","Sujet",mStringList)
 
 
     );
