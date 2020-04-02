@@ -18,22 +18,22 @@ public abstract class DummyMeetingGenerator{
 
    private static int hoursMeeting = 14;
 
-   private static List<String> mStringList = ParticipantsGenerator.adressGenerator();
-   public static final int  color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
-
-
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(color, hoursMeeting,"Salle test 1","Sujet",mStringList),
-            new Meeting(color, hoursMeeting,"Salle test 2","Sujet",mStringList),
-            new Meeting(color, hoursMeeting,"Salle test 3","Sujet",mStringList),
-            new Meeting(color, hoursMeeting,"Salle test 4","Sujet",mStringList)
+            new Meeting(generateColor(), hoursMeeting,"Salle test 1","Sujet",ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting,"Salle test 2","Sujet",ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting,"Salle test 3","Sujet",ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting,"Salle test 4","Sujet",ParticipantsGenerator.adressGenerator())
 
 
     );
 
     static List<Meeting> generateMeeting() {
         return new ArrayList<>(DUMMY_MEETING);
+    }
+
+    public static int generateColor(){
+        return rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
     }
 
 }

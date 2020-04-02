@@ -53,10 +53,11 @@ public class Meeting {
     }
 
     public String getParticipantsList() {
-        for (String participants : participantsList) {
-            return participants + ", ";
+        String participants = "";
+        for (String participant : participantsList) {
+            participants += participant + ", ";
         }
-        return null;
+        return participants;
     }
 
     public void setParticipantsList(List<String> participantsList) {

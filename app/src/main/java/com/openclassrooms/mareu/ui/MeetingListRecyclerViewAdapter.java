@@ -53,6 +53,13 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

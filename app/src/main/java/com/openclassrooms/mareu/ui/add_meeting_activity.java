@@ -2,7 +2,6 @@ package com.openclassrooms.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,13 +12,11 @@ import android.widget.TimePicker;
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.model.Meeting;
+import com.openclassrooms.mareu.service.DummyMeetingGenerator;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import static android.graphics.Color.rgb;
 
 public class add_meeting_activity extends AppCompatActivity {
 
@@ -32,14 +29,14 @@ Button mButtonSave;
 
 MeetingApiService mApiService;
 
-final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
+final int color = DummyMeetingGenerator.generateColor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting_activity);
 
-        mApiService = DI.getNeighbourApiService();
+        mApiService = DI.getMeetingApiService();
 
 
         mImageView = findViewById(R.id.color_meeting);
@@ -53,6 +50,7 @@ final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Ra
 
 
         mButtonSave = findViewById(R.id.save_meeting);
+        //region RegionButtonSaveClick
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,5 +72,16 @@ final int color = rgb(new Random().nextInt(255),new Random().nextInt(255),new Ra
                 finish();
             }
         });
+        //endregion
+
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor());
+            }
+        });
+
+
+
     }
 }

@@ -1,6 +1,5 @@
 package com.openclassrooms.mareu.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.SystemClock;
 import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
@@ -39,7 +37,7 @@ public class list_meeting_activity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mApiService = DI.getNeighbourApiService();
+        mApiService = DI.getMeetingApiService();
 
         mRecyclerView = findViewById(R.id.meeting_list);
 
