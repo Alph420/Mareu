@@ -14,16 +14,22 @@ import static android.graphics.Color.rgb;
  * Created by Alph4 le 26/03/2020.
  * Projet: Mareu
  **/
-public abstract class DummyMeetingGenerator{
+public abstract class DummyMeetingGenerator {
 
-   private static int hoursMeeting = 14;
+    private static int actualColor;
+
+    public static int getActualColor() {
+        return actualColor;
+    }
+
+    private static int hoursMeeting = 14;
 
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(generateColor(), hoursMeeting,"Salle test 1","Sujet",ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting,"Salle test 2","Sujet",ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting,"Salle test 3","Sujet",ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting,"Salle test 4","Sujet",ParticipantsGenerator.adressGenerator())
+            new Meeting(generateColor(), hoursMeeting, "Salle test 1", "Sujet", ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting, "Salle test 2", "Sujet", ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting, "Salle test 3", "Sujet", ParticipantsGenerator.adressGenerator()),
+            new Meeting(generateColor(), hoursMeeting, "Salle test 4", "Sujet", ParticipantsGenerator.adressGenerator())
 
 
     );
@@ -32,8 +38,9 @@ public abstract class DummyMeetingGenerator{
         return new ArrayList<>(DUMMY_MEETING);
     }
 
-    public static int generateColor(){
-        return rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255));
+    public static int generateColor() {
+        actualColor = rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
+        return actualColor;
     }
 
 }

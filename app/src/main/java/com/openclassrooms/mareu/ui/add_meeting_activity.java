@@ -2,34 +2,42 @@ package com.openclassrooms.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.model.Meeting;
+import com.openclassrooms.mareu.model.Salle;
 import com.openclassrooms.mareu.service.DummyMeetingGenerator;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class add_meeting_activity extends AppCompatActivity {
 
-ImageView mImageView;
-TimePicker mDateMeeting;
-EditText mLocationMeeting;
-EditText mSujet_meeting;
-EditText mParticipant;
-Button mButtonSave;
+    ImageView mImageView;
+    TimePicker mDateMeeting;
+    Spinner mLocationMeeting;
+    EditText mSujet_meeting;
+    EditText mParticipant;
+    Button mButtonSave;
 
-MeetingApiService mApiService;
+    MeetingApiService mApiService;
 
-final int color = DummyMeetingGenerator.generateColor();
+    final int color = DummyMeetingGenerator.generateColor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,12 @@ final int color = DummyMeetingGenerator.generateColor();
         mSujet_meeting = findViewById(R.id.sujet_meeting);
         mParticipant = findViewById(R.id.participant);
 
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor());
+            }
+        });
 
         mButtonSave = findViewById(R.id.save_meeting);
         //region RegionButtonSaveClick
@@ -55,32 +69,29 @@ final int color = DummyMeetingGenerator.generateColor();
             @Override
             public void onClick(View v) {
 
-               int meetingTime = 0/*mDateMeeting.getHour() + mDateMeeting.getMinute()*/;
+                int meetingTime = 0/*mDateMeeting.getHour() + mDateMeeting.getMinute()*/;
 
                 String particpants = mParticipant.getText().toString();
 
-                String [] participantsList = particpants.split("\n");
+                String[] participantsList = particpants.split("\n");
                 List<String> participantListMeeting = new ArrayList<String>();
 
-                for (String participant: participantsList) {
+                for (String participant : participantsList) {
                     System.out.println(participant);
                     participantListMeeting.add(participant);
                 }
 
-                Meeting meeting = new Meeting(color,meetingTime,mLocationMeeting.getText().toString(),mSujet_meeting.getText().toString(),participantListMeeting);
+                Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), meetingTime, mLocationMeeting.getSelectedItem().toString(), mSujet_meeting.getText().toString(), participantListMeeting);
                 mApiService.createMeeting(meeting);
                 finish();
             }
         });
         //endregion
 
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor());
-            }
-        });
-
+        List<String> area = Salle.getSalle();
+        ArrayAdapter<String> salleArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, area);
+        mLocationMeeting.setDropDownHorizontalOffset(android.R.layout.simple_dropdown_item_1line);
+        mLocationMeeting.setAdapter(salleArrayAdapter);
 
 
     }

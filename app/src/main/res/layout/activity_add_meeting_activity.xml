@@ -32,7 +32,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         />
-        
+
 
 
 
@@ -63,16 +63,12 @@
 
             >
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/location_meeting"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:ems="10"
-                android:hint="Salle"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:minLines="4" />
+                <Spinner
+                    android:id="@+id/location_meeting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_style"
+                  />
 
         </com.google.android.material.textfield.TextInputLayout>
 

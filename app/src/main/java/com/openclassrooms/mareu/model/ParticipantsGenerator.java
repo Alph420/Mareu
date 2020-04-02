@@ -20,7 +20,7 @@ public class ParticipantsGenerator {
        List<String> tab = new ArrayList<>();
         String adress;
 
-        for (int i=0;i<5;i++) {
+        for (int i=0;i<4;i++) {
             String prenom = prenomTab[rnd.nextInt(prenomTab.length)];
             String nom = nomTab[rnd.nextInt(nomTab.length)];
             adress = prenom + nom + "@service.com";
