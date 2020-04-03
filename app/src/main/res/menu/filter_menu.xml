@@ -6,5 +6,24 @@
         android:id="@+id/filter"
         android:icon="@drawable/ic_filter_list_white_24dp"
         android:title="Filtre"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom">
+
+        <item
+            android:id="@+id/filterDate"
+            app:showAsAction="never"
+            android:title="Par date" />
+
+
+        <item
+            android:id="@+id/filterHours"
+            app:showAsAction="never"
+            android:title="Par heure" />
+
+    </item>
+
+
+
+
+
+
 </menu>

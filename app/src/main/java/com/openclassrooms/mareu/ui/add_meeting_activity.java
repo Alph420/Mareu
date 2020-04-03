@@ -1,19 +1,17 @@
 package com.openclassrooms.mareu.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlarmManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
@@ -71,21 +69,20 @@ public class add_meeting_activity extends AppCompatActivity {
         final int getHour;
         final int getMinute;
 
-        if(Build.VERSION.SDK_INT < 23){
-             getHour = mDateMeeting.getCurrentHour();
-             getMinute = mDateMeeting.getCurrentMinute();
+        if (Build.VERSION.SDK_INT < 23) {
+            getHour = mDateMeeting.getCurrentHour();
+            getMinute = mDateMeeting.getCurrentMinute();
 
             calendar.set(Calendar.HOUR_OF_DAY, mDateMeeting.getCurrentHour());
             calendar.set(Calendar.MINUTE, mDateMeeting.getCurrentMinute());
-        } else{
-             getHour = mDateMeeting.getHour();
-             getMinute = mDateMeeting.getMinute();
+        } else {
+            getHour = mDateMeeting.getHour();
+            getMinute = mDateMeeting.getMinute();
 
             calendar.set(Calendar.HOUR_OF_DAY, mDateMeeting.getHour());
             calendar.set(Calendar.MINUTE, mDateMeeting.getMinute());
         }
         //endregion
-
 
         //region RegionSpinner
         List<String> area = Salle.getSalle();

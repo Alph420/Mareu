@@ -10,6 +10,7 @@ import com.openclassrooms.mareu.events.DeleteMeetingEvent;
 import com.openclassrooms.mareu.model.Meeting;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -18,13 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
-
 
 public class list_meeting_activity extends AppCompatActivity {
 
@@ -45,7 +46,7 @@ public class list_meeting_activity extends AppCompatActivity {
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
 
         initList();
@@ -63,8 +64,21 @@ public class list_meeting_activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.filter_menu,menu);
+        inflater.inflate(R.menu.filter_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.filterDate:
+                break;
+
+            case R.id.filterHours:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initList() {
@@ -72,6 +86,7 @@ public class list_meeting_activity extends AppCompatActivity {
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
     }
 
+    //region RegionOverride
     @Override
     public void onResume() {
         super.onResume();
@@ -92,9 +107,10 @@ public class list_meeting_activity extends AppCompatActivity {
         System.out.println("Stop");
         EventBus.getDefault().unregister(this);
     }
+    //endregion
 
     @Subscribe
-    public void onDeleteMeetingEvent(DeleteMeetingEvent event){
+    public void onDeleteMeetingEvent(DeleteMeetingEvent event) {
         mApiService.deleteMeeting(event.meeting);
         initList();
     }

@@ -24,14 +24,11 @@ public abstract class DummyMeetingGenerator {
 
     private static int hoursMeeting = 14;
 
-
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
             new Meeting(generateColor(), hoursMeeting, "Salle test 1", "Sujet", ParticipantsGenerator.adressGenerator()),
             new Meeting(generateColor(), hoursMeeting, "Salle test 2", "Sujet", ParticipantsGenerator.adressGenerator()),
             new Meeting(generateColor(), hoursMeeting, "Salle test 3", "Sujet", ParticipantsGenerator.adressGenerator()),
             new Meeting(generateColor(), hoursMeeting, "Salle test 4", "Sujet", ParticipantsGenerator.adressGenerator())
-
-
     );
 
     static List<Meeting> generateMeeting() {
@@ -42,5 +39,4 @@ public abstract class DummyMeetingGenerator {
         actualColor = rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
         return actualColor;
     }
-
 }

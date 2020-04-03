@@ -14,7 +14,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public List<Meeting> getMeeting() {
-     return  meetings;
+        return meetings;
     }
 
     @Override
@@ -24,6 +24,6 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public void deleteMeeting(Meeting meeting) {
-    meetings.remove(meeting);
+        meetings.remove(meeting);
     }
 }

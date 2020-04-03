@@ -9,8 +9,8 @@ import java.util.List;
  * Projet: Mareu
  **/
 public class Salle {
-    private String salleName;
 
+    private String salleName;
 
     public Salle(String salleName) {
         this.salleName = salleName;
@@ -27,7 +27,6 @@ public class Salle {
             new Salle("Salle D")
     );
 
-
     static public List<String> getSalle() {
         List<String> listSalle = new ArrayList<>();
         for (Salle salle : listSalles) {
@@ -35,5 +34,4 @@ public class Salle {
         }
         return listSalle;
     }
-
 }

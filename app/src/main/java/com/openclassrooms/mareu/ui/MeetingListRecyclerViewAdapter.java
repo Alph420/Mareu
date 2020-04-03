@@ -1,6 +1,7 @@
 package com.openclassrooms.mareu.ui;
 
 import org.greenrobot.eventbus.EventBus;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.ButterKnife;
 import butterknife.BindView;
+
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.events.DeleteMeetingEvent;
 import com.openclassrooms.mareu.model.Meeting;
@@ -26,7 +29,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     private final List<Meeting> mMeetingList;
 
-    public MeetingListRecyclerViewAdapter(List<Meeting> MeetingList){
+    public MeetingListRecyclerViewAdapter(List<Meeting> MeetingList) {
         mMeetingList = MeetingList;
     }
 
@@ -71,7 +74,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         public TextView mMeetingParticipants;
 
 
-        public ViewHolder(View view ) {
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
 

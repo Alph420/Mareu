@@ -2,9 +2,12 @@ package com.openclassrooms.mareu;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.model.Meeting;
+
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+
 import com.openclassrooms.mareu.service.DummyMeetingGenerator;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
@@ -36,9 +39,9 @@ public class MeetingServiceTest {
 
 
     @Test
-    public void createNeighbourWithSuccess(){
+    public void createNeighbourWithSuccess() {
         List<String> list = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting test = new Meeting(rgb(new Random().nextInt(255),new Random().nextInt(255),new Random().nextInt(255)), 14, "Test", "test",
+        Meeting test = new Meeting(rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255)), 14, "Test", "test",
                 list);
         service.createMeeting(test);
         assertTrue(service.getMeeting().contains(test));

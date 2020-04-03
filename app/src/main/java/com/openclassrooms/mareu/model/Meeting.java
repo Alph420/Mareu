@@ -8,7 +8,6 @@ import java.util.List;
  **/
 public class Meeting {
 
-
     private int color;
 
     private int hoursMeeting;
@@ -65,8 +64,8 @@ public class Meeting {
     }
 
 
-    public String getInfo(){
-        return this.getRoom() + " - " + this.getHoursMeeting() +" - "+ this.getSujet();
+    public String getInfo() {
+        return this.getRoom() + " - " + this.getHoursMeeting() + " - " + this.getSujet();
     }
 
     public Meeting(int color, int hourMeeting, String room, String sujet, List<String> participantsList) {
