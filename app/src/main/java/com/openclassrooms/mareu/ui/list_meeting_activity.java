@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,6 +60,13 @@ public class list_meeting_activity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.filter_menu,menu);
+        return true;
+    }
+
     private void initList() {
         mMeeting = mApiService.getMeeting();
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
@@ -89,5 +98,4 @@ public class list_meeting_activity extends AppCompatActivity {
         mApiService.deleteMeeting(event.meeting);
         initList();
     }
-
 }

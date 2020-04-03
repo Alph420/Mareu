@@ -13,6 +13,7 @@ public class ParticipantsGenerator {
     private static Random rnd = new Random();
     private static String prenomTab[] = {"Gabriel" ,"Raphaël" ,"Léo" ,"Louis", "Lucas" ,"Adam" ,"Arthur" ,"Hugo"};
     private static String nomTab[] = {"Creleilles","Chagnac", "Gaissier", "Chaubannes", "Ginenet", "Clarithier", "Cardaimont", "Alirral"};
+    public static List<String> listParticipants = adressGenerator();
 
 
     //Generateur d'adresse email
