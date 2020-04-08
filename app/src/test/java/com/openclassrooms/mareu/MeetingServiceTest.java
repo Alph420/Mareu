@@ -1,6 +1,5 @@
 package com.openclassrooms.mareu;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.openclassrooms.mareu.di.DI;
@@ -15,20 +14,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
-
 import static org.junit.Assert.*;
 import static android.graphics.Color.rgb;
 
 
 public class MeetingServiceTest {
 
-    private MeetingApiService service;
+    private MeetingApiService service = DI.getMeetingApiService();
 
-    @Before
-    public void setup() {
-        service = DI.getMeetingApiService();
-    }
 
     @Test
     public void getMeetingWithSuccess() {
@@ -39,9 +32,9 @@ public class MeetingServiceTest {
 
 
     @Test
-    public void createNeighbourWithSuccess() {
+    public void createMeetingWithSuccess() {
         List<String> list = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting test = new Meeting(rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255)), 14, "Test", "test",
+        Meeting test = new Meeting(rgb(100,150,200), "14h30", hoursMeetingEnd, "Test", "test",
                 list);
         service.createMeeting(test);
         assertTrue(service.getMeeting().contains(test));
@@ -49,7 +42,7 @@ public class MeetingServiceTest {
 
 
     @Test
-    public void deleteNeighbourWithSuccess() {
+    public void deleteMeetingWithSuccess() {
         Meeting meetingToDelete = service.getMeeting().get(0);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeeting().contains(meetingToDelete));

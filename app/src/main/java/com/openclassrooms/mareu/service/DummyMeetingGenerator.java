@@ -1,7 +1,7 @@
 package com.openclassrooms.mareu.service;
 
 import com.openclassrooms.mareu.model.Meeting;
-import com.openclassrooms.mareu.model.ParticipantsGenerator;
+import com.openclassrooms.mareu.model.Users;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,13 +22,14 @@ public abstract class DummyMeetingGenerator {
         return actualColor;
     }
 
-    private static int hoursMeeting = 14;
+    private static String hoursMeeting = "14";
+    private static String minutesMeeting = "30";
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(generateColor(), hoursMeeting, "Salle test 1", "Sujet", ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting, "Salle test 2", "Sujet", ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting, "Salle test 3", "Sujet", ParticipantsGenerator.adressGenerator()),
-            new Meeting(generateColor(), hoursMeeting, "Salle test 4", "Sujet", ParticipantsGenerator.adressGenerator())
+            new Meeting(generateColor(), hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 1", "Sujet", Users.listParticipants),
+            new Meeting(generateColor(),hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 2", "Sujet", Users.listParticipants),
+            new Meeting(generateColor(),hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 3", "Sujet", Users.listParticipants),
+            new Meeting(generateColor(), hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 4", "Sujet", Users.listParticipants)
     );
 
     static List<Meeting> generateMeeting() {

@@ -73,9 +73,11 @@ public class list_meeting_activity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.filterDate:
+
                 break;
 
-            case R.id.filterHours:
+            case R.id.filterLocation:
+
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -114,4 +116,5 @@ public class list_meeting_activity extends AppCompatActivity {
         mApiService.deleteMeeting(event.meeting);
         initList();
     }
+
 }

@@ -10,29 +10,39 @@ public class Meeting {
 
     private int color;
 
-    private int hoursMeeting;
+    private String hoursMeetingStart;
+
+    private String hoursMeetingEnd;
 
     private String room;
+
+    private String date;
 
     private String sujet;
 
     private List<String> participantsList;
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public int getColor() {
         return color;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setColor(int color) { this.color = color;}
+
+
+    public String getHoursMeetingStart() {
+        return hoursMeetingStart;
     }
 
-
-    public int getHoursMeeting() {
-        return hoursMeeting;
-    }
-
-    public void setHoursMeeting(int hoursMeeting) {
-        this.hoursMeeting = hoursMeeting;
+    public void setHoursMeetingStart(String hoursMeetingStart) {
+        this.hoursMeetingStart = hoursMeetingStart;
     }
 
     public String getRoom() {
@@ -65,12 +75,13 @@ public class Meeting {
 
 
     public String getInfo() {
-        return this.getRoom() + " - " + this.getHoursMeeting() + " - " + this.getSujet();
+        return this.getRoom() + " - " + this.getHoursMeetingStart() + " - " + this.getSujet();
     }
 
-    public Meeting(int color, int hourMeeting, String room, String sujet, List<String> participantsList) {
+    public Meeting(int color, String hourMeetingStart, String hoursMeetingEnd, String room, String sujet, List<String> participantsList) {
         this.color = color;
-        this.hoursMeeting = hourMeeting;
+        this.hoursMeetingStart = hourMeetingStart;
+        this.hoursMeetingEnd = hoursMeetingEnd;
         this.room = room;
         this.sujet = sujet;
         this.participantsList = participantsList;

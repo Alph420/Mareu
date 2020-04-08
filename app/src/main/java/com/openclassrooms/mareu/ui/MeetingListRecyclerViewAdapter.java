@@ -45,7 +45,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Meeting meeting = mMeetingList.get(position);
-        holder.mMeetingColor.setBackgroundColor(meeting.getColor());
+        holder.mMeetingColor.setColorFilter(meeting.getColor());
         holder.mMeetingInfo.setText(meeting.getInfo());
         holder.mMeetingParticipants.setText(meeting.getParticipantsList());
 

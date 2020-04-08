@@ -6,8 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.add_meeting_activity">
 
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_arrow_white_24dp"
+        app:layout_constraintStart_toStartOf="@+id/scrollView"
+        app:layout_constraintTop_toTopOf="@+id/scrollView" />
+
+
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="parent"
@@ -15,112 +24,161 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/color_meeting"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp"
-        />
-
-
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/date_meetingLyt"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp">
-
-            <TimePicker
-                android:id="@+id/date_meeting"
+            <ImageView
+                android:id="@+id/color_meeting"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
-                android:timePickerMode="spinner" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/location_meetingLyt"
-            style="@style/LayoutStyle"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:text="Date de reunion"
+                android:textColor="@color/colorCyanBlue"
+                android:textSize="20sp" />
 
-            >
+            <DatePicker
+                android:id="@+id/date_meeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                style="@style/date_picker_theme"
+                android:startYear="2020"
+                android:endYear="2100"
+                />
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_meetingStartLyt"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:text="heure de debut"
+                    android:textColor="@color/colorCyanBlue"
+                    android:textSize="20sp" />
+
+
+                <TimePicker
+                    android:id="@+id/date_meeting_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:timePickerMode="spinner" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_meeting_end_Lyt"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:text="heure de Fin"
+                    android:textColor="@color/colorCyanBlue"
+                    android:textSize="20sp" />
+
+
+                <TimePicker
+                    android:id="@+id/date_meeting_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:timePickerMode="spinner" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/location_meetingLyt"
+                style="@style/LayoutStyle"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp">
 
                 <Spinner
                     android:id="@+id/location_meeting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/spinner_style"
-                  />
+                    android:background="@drawable/spinner_style" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/sujet_meetingLyt"
-            style="@style/LayoutStyle"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-
-            >
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/sujet_meeting"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sujet_meetingLyt"
+                style="@style/LayoutStyle"
                 android:layout_width="300dp"
-                android:layout_height="50dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:ems="10"
-                android:hint="Sujet"
-                android:inputType="textMultiLine"
-                android:lines="4"
-                android:minLines="4" />
+                android:layout_marginTop="10dp"
+                >
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/sujet_meeting"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:hint="Sujet"
+                    android:inputType="textMultiLine"
+                    android:lines="1"
+                    android:minLines="1" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/participantLyt"
-            style="@style/LayoutStyle"
-            android:layout_width="300dp"
-            android:layout_height="160dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <MultiAutoCompleteTextView
-                android:id="@+id/participant"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/participantLyt"
+                style="@style/LayoutStyle"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <MultiAutoCompleteTextView
+                    android:id="@+id/participant"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Participants" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/save_meeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorCyanBlue"
-            android:text="Save" />
+            <Button
+                android:id="@+id/save_meeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorCyanBlue"
+                android:text="Save" />
 
-    </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
