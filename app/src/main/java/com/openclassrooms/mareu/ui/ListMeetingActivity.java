@@ -20,14 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-public class list_meeting_activity extends AppCompatActivity {
+public class ListMeetingActivity extends AppCompatActivity {
 
     FloatingActionButton mFloatingActionButton;
     RecyclerView mRecyclerView;
@@ -52,12 +51,9 @@ public class list_meeting_activity extends AppCompatActivity {
         initList();
 
         mFloatingActionButton = findViewById(R.id.add_meeting);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), add_meeting_activity.class);
-                startActivity(intent);
-            }
+        mFloatingActionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), AddMeetingActivity.class);
+            startActivity(intent);
         });
     }
 

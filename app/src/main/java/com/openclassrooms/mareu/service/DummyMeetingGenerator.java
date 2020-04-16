@@ -23,13 +23,12 @@ public abstract class DummyMeetingGenerator {
     }
 
     private static String hoursMeeting = "14";
-    private static String minutesMeeting = "30";
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(generateColor(), hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 1", "Sujet", Users.listParticipants),
-            new Meeting(generateColor(),hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 2", "Sujet", Users.listParticipants),
-            new Meeting(generateColor(),hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 3", "Sujet", Users.listParticipants),
-            new Meeting(generateColor(), hoursMeeting+'h'+ minutesMeeting, "15h30", "Salle test 4", "Sujet", Users.listParticipants)
+            new Meeting(generateColor(), hoursMeeting+'h', "15h", "Salle A", "Sujet 1", Users.listParticipants),
+            new Meeting(generateColor(),hoursMeeting+'h', "15h", "Salle B", "Sujet 2", Users.listParticipants),
+            new Meeting(generateColor(),hoursMeeting+'h', "15h", "Salle C", "Sujet 3", Users.listParticipants),
+            new Meeting(generateColor(), hoursMeeting+'h', "15h", "Salle E", "Sujet 4", Users.listParticipants)
     );
 
     static List<Meeting> generateMeeting() {

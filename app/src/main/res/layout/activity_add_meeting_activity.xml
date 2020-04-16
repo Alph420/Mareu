@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.add_meeting_activity">
+    tools:context=".ui.AddMeetingActivity">
 
     <Button
         android:id="@+id/buttonBack"
@@ -63,34 +63,30 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/date_meetingStartLyt"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp">
-
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp"
-                    android:text="heure de debut"
+                    android:text="@string/heure_de_debut"
                     android:textColor="@color/colorCyanBlue"
-                    android:textSize="20sp" />
-
+                    android:textSize="20sp"
+                    />
 
                 <TimePicker
                     android:id="@+id/date_meeting_start"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
+                    android:layout_height="120dp"
                     android:timePickerMode="spinner" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/date_meeting_end_Lyt"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp">
 
@@ -99,8 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp"
-                    android:text="heure de Fin"
+                    android:text="@string/heure_de_fin"
                     android:textColor="@color/colorCyanBlue"
                     android:textSize="20sp" />
 
@@ -108,16 +103,13 @@
                 <TimePicker
                     android:id="@+id/date_meeting_end"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
+                    android:layout_height="120dp"
                     android:timePickerMode="spinner" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/location_meetingLyt"
-                style="@style/LayoutStyle"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
@@ -132,7 +124,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/sujet_meetingLyt"
-                style="@style/LayoutStyle"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
@@ -145,7 +136,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
-                    android:hint="Sujet"
+                    android:hint="@string/sujet"
                     android:inputType="textMultiLine"
                     android:lines="1"
                     android:minLines="1" />
@@ -154,7 +145,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/participantLyt"
-                style="@style/LayoutStyle"
                 android:layout_width="300dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
@@ -164,7 +154,7 @@
                     android:id="@+id/participant"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Participants" />
+                    android:hint="@string/participants" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -176,7 +166,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:background="@color/colorCyanBlue"
-                android:text="Save" />
+                android:text="@string/save" />
 
         </LinearLayout>
 

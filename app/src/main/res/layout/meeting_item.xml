@@ -7,24 +7,22 @@
     android:orientation="vertical">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/item_list_color"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             android:src="@drawable/rounded"
+            android:alpha="0.5"
             />
 
 
-
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         android:id="@+id/item_list_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +43,10 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="none"
         >
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_list_participants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +60,7 @@
             app:layout_constraintTop_toTopOf="@+id/item_list_color" />
     </HorizontalScrollView>
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <ImageButton
         android:id="@+id/item_list_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

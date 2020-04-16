@@ -3,7 +3,6 @@ package com.openclassrooms.mareu.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Alph4 le 31/03/2020.
@@ -15,13 +14,13 @@ public class Users {
     private String nom;
     private static String adresseEmail = "@service.com";
 
-    public Users(String prenom, String nom,String adresseEmail) {
+    private Users(String prenom, String nom, String adresseEmail) {
         this.prenom = prenom;
         this.nom = nom;
-        this.adresseEmail = adresseEmail;
+        Users.adresseEmail = adresseEmail;
     }
 
-    public static List<Users> DUMMY_USERS = Arrays.asList(
+    private static List<Users> DUMMY_USERS = Arrays.asList(
             new Users("Philippe","Ginenet",adresseEmail),
             new Users("Raphaël","Cardaimont",adresseEmail),
             new Users("Gabriel","Alirral",adresseEmail),
@@ -29,29 +28,28 @@ public class Users {
 
     );
 
-
-    public static List<String> listParticipants = adressGenerator();
-    public static List<String> listPrenom = prenomGenerator();
-    public static List<String> listNom = nomGenerator();
-
+    public static List listParticipants = adressGenerator();
+    public static List listPrenom = prenomGenerator();
+    public static List listNom = nomGenerator();
 
 
-    public static List adressGenerator() {
+
+    private static List adressGenerator() {
         List<String> tab = new ArrayList<>();
         for (Users utilisateur : DUMMY_USERS) {
-            tab.add(utilisateur.prenom + utilisateur.nom + utilisateur.adresseEmail);
+            tab.add(utilisateur.prenom + utilisateur.nom + adresseEmail);
         }
         return tab;
     }
 
-    public static List prenomGenerator() {
+    private static List prenomGenerator() {
         List<String> tab = new ArrayList<>();
         for (Users utilisateur : DUMMY_USERS) {
             tab.add(utilisateur.prenom );
         }
         return tab;
     }
-    public static List nomGenerator() {
+    private static List nomGenerator() {
         List<String> tab = new ArrayList<>();
         for (Users utilisateur : DUMMY_USERS) {
             tab.add(utilisateur.nom);

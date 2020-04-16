@@ -1,14 +1,27 @@
 package com.openclassrooms.mareu;
 
-import android.content.Context;
+import android.view.View;
 
-import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
+import com.openclassrooms.mareu.ui.ListMeetingActivity;
+import com.openclassrooms.mareu.utils.DeleteViewAction;
+
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -17,11 +30,38 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class MeetingListTest {
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+    // This is fixed
+    private static int ITEMS_COUNT = 4;
 
-        assertEquals("com.openclassrooms.mareu", appContext.getPackageName());
+    @Rule
+    public ActivityTestRule<ListMeetingActivity> mActivityRule =
+            new ActivityTestRule(ListMeetingActivity.class);
+
+
+    @Test
+    public void myMeetingList_shouldNotBeEmpty() {
+        // First scroll to the position that needs to be matched and click on it.
+        onView(ViewMatchers.withId(R.id.meeting_list))
+                .check(matches(hasMinimumChildCount(1)));
+    }
+
+    @Test
+    public void myAddingMeetingButton_workingSucess(){
+        onView(ViewMatchers.withId(R.id.add_meeting))
+                .perform(click());
+
+        onView(ViewMatchers.withId(R.id.color_meeting))
+                .check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void myMeetingList_deleteAction_shouldRemoveItem() {
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
+
+        onView(ViewMatchers.withId(R.id.meeting_list))
+                .perform(actionOnItemAtPosition(1, new DeleteViewAction()));
+
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT-1)));
     }
 }

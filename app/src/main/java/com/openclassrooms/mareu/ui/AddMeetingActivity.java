@@ -23,12 +23,11 @@ import com.openclassrooms.mareu.model.Salle;
 import com.openclassrooms.mareu.service.DummyMeetingGenerator;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class add_meeting_activity extends AppCompatActivity {
+public class AddMeetingActivity extends AppCompatActivity {
 
     Button mButtonBack;
     ImageView mImageView;
@@ -76,7 +75,7 @@ public class add_meeting_activity extends AppCompatActivity {
         mButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(add_meeting_activity.this, list_meeting_activity.class);
+                Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
                 startActivity(intent);
             }
         });
@@ -131,7 +130,6 @@ public class add_meeting_activity extends AppCompatActivity {
             calendar.set(Calendar.HOUR_OF_DAY, mDateMeetingEnd.getHour());
             calendar.set(Calendar.MINUTE, mDateMeetingEnd.getMinute());
         }
-
         //endregion
 
         //region RegionSpinner
