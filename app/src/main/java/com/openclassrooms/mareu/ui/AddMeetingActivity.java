@@ -72,20 +72,12 @@ public class AddMeetingActivity extends AppCompatActivity {
         mParticipant = findViewById(R.id.participant);
         //endregion
 
-        mButtonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
-                startActivity(intent);
-            }
+        mButtonBack.setOnClickListener(v -> {
+            Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
+            startActivity(intent);
         });
 
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor());
-            }
-        });
+        mImageView.setOnClickListener(v -> mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor()));
 
 
         //region RegionDatePicker
