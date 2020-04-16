@@ -1,5 +1,6 @@
 package com.openclassrooms.mareu.model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,17 +17,17 @@ public class Meeting {
 
     private String room;
 
-    private String date;
+    private Date date;
 
     private String sujet;
 
     private List<String> participantsList;
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
