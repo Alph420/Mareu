@@ -25,6 +25,7 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -85,7 +86,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         int month = mDateMeeting.getMonth();
         int year = mDateMeeting.getYear();
 
-        final String date = String.valueOf(jour) + String.valueOf(month) + String.valueOf(year);
+        calendar.set(year, month, jour);
         //endregion
 
         //region RegionTimerPicker
@@ -152,28 +153,25 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         //region RegionButtonSaveClick
         mButtonSave = findViewById(R.id.save_meeting);
-        mButtonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mButtonSave.setOnClickListener(v -> {
 
-                String meetingTimeStart = String.valueOf(getHourStart) +'h'+ String.valueOf(getMinuteStart);
-                String meetingTimeEnd = String.valueOf(getHourEnd) +'h'+ String.valueOf(getMinuteEnd);
+            String meetingTimeStart = String.valueOf(getHourStart) +'h'+ getMinuteStart;
+            String meetingTimeEnd = String.valueOf(getHourEnd) +'h'+ getMinuteEnd;
 
-                String particpants = mParticipant.getText().toString();
+            String particpants = mParticipant.getText().toString();
 
-                String[] participantsList = particpants.split("\n");
-                List<String> participantListMeeting = new ArrayList<String>();
+            String[] participantsList = particpants.split("\n");
+            List<String> participantListMeeting = new ArrayList<String>();
 
-                for (String participant : participantsList) {
-                    System.out.println(participant);
-                    participantListMeeting.add(participant);
-                }
-
-                Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), meetingTimeStart, meetingTimeEnd, mLocationMeeting.getSelectedItem().toString(), mSujet_meeting.getText().toString(), participantListMeeting);
-                meeting.setDate(date);
-                mApiService.createMeeting(meeting);
-                finish();
+            for (String participant : participantsList) {
+                System.out.println(participant);
+                participantListMeeting.add(participant);
             }
+
+            Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), meetingTimeStart, meetingTimeEnd, mLocationMeeting.getSelectedItem().toString(), mSujet_meeting.getText().toString(), participantListMeeting);
+            meeting.setDate(calendar.getTime());
+            mApiService.createMeeting(meeting);
+            finish();
         });
         //endregion
     }
