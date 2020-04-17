@@ -35,7 +35,9 @@ public class Meeting {
         return color;
     }
 
-    public void setColor(int color) { this.color = color;}
+    public void setColor(int color) {
+        this.color = color;
+    }
 
 
     public String getHoursMeetingStart() {
@@ -44,6 +46,14 @@ public class Meeting {
 
     public void setHoursMeetingStart(String hoursMeetingStart) {
         this.hoursMeetingStart = hoursMeetingStart;
+    }
+
+    public String getHoursMeetingEnd() {
+        return hoursMeetingEnd;
+    }
+
+    public void setHoursMeetingEnd(String hoursMeetingEnd) {
+        this.hoursMeetingEnd = hoursMeetingEnd;
     }
 
     public String getRoom() {
@@ -79,11 +89,12 @@ public class Meeting {
         return this.getRoom() + " - " + this.getHoursMeetingStart() + " - " + this.getSujet();
     }
 
-    public Meeting(int color, String hourMeetingStart, String hoursMeetingEnd, String room, String sujet, List<String> participantsList) {
+    public Meeting(int color, String hoursMeetingStart, String hoursMeetingEnd, String room, Date date, String sujet, List<String> participantsList) {
         this.color = color;
-        this.hoursMeetingStart = hourMeetingStart;
+        this.hoursMeetingStart = hoursMeetingStart;
         this.hoursMeetingEnd = hoursMeetingEnd;
         this.room = room;
+        this.date = date;
         this.sujet = sujet;
         this.participantsList = participantsList;
     }

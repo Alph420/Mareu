@@ -3,7 +3,7 @@
 
     <string name="heure_de_debut">heure de debut</string>
     <string name="heure_de_fin">heure de Fin</string>
-    <string name="sujet">Sujet</string>
+    <string name="sujet">Sujet (4 caracteres minimum)</string>
     <string name="participants">Participants</string>
     <string name="save">Save</string>
     <string name="filtre">Filtre</string>
