@@ -1,4 +1,4 @@
-Mareu application dédiée a listé ses reunion et à a en cree;
+Mareu application dédiée a listé ses réunions et à a en crée ;
 
 
 For open this project on Android Studio:
