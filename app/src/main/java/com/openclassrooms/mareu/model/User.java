@@ -29,10 +29,6 @@ public class User {
     );
 
     public static List listParticipants = adressGenerator();
-    public static List listPrenom = prenomGenerator();
-    public static List listNom = nomGenerator();
-
-
 
     private static List adressGenerator() {
         List<String> tab = new ArrayList<>();
@@ -41,21 +37,4 @@ public class User {
         }
         return tab;
     }
-
-    private static List prenomGenerator() {
-        List<String> tab = new ArrayList<>();
-        for (User utilisateur : DUMMY_USER) {
-            tab.add(utilisateur.firstName);
-        }
-        return tab;
-    }
-    private static List nomGenerator() {
-        List<String> tab = new ArrayList<>();
-        for (User utilisateur : DUMMY_USER) {
-            tab.add(utilisateur.lastName);
-        }
-        return tab;
-    }
-
-
 }

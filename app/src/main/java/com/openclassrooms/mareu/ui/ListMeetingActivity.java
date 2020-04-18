@@ -78,42 +78,36 @@ public class ListMeetingActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.filterDate:
-                final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                final AlertDialog.Builder builderDatePicker = new AlertDialog.Builder(this);
                 DatePicker picker = new DatePicker(this);
                 picker.setCalendarViewShown(false);
-                builder1.setView(picker);
+                builderDatePicker.setView(picker);
 
 
-                builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        int year = picker.getYear();
-                        int mon = picker.getMonth();
-                        int day = picker.getDayOfMonth();
-                        Date date = new GregorianCalendar(year,mon,day).getTime();
-                        initList(date);
-                    }
+                builderDatePicker.setPositiveButton("OK", (dialog, which) -> {
+                    int year = picker.getYear();
+                    int mon = picker.getMonth();
+                    int day = picker.getDayOfMonth();
+                    Date date = new GregorianCalendar(year, mon, day).getTime();
+                    initList(date);
                 });
-                builder1.setNegativeButton("Reset", (dialog, whichButton) -> initList());
-                builder1.show();
-
-
+                builderDatePicker.setNegativeButton("Reset", (dialog, whichButton) -> initList());
+                builderDatePicker.show();
                 break;
 
             case R.id.filterLocation:
-                List<String> salleList = Room.getSalle();
-                String[] salleArray = new String[salleList.size()];
-                salleArray = salleList.toArray(salleArray);
-                final String[] salle = new String[1];
+                List<String> roomList = Room.getSalle();
+                String[] roomArray = new String[roomList.size()];
+                roomArray = roomList.toArray(roomArray);
+                final String[] room = new String[1];
                 final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
                 builderRoom.setTitle("Choisissez une Salle");
 
-                String[] finalSalleArray = salleArray;
+                String[] finalRoomList = roomArray;
 
-                builderRoom.setSingleChoiceItems(salleArray,-1,
-                        (dialog, which) -> salle[0] = finalSalleArray[which]);
+                builderRoom.setSingleChoiceItems(roomArray, -1, (dialog, which) -> room[0] = finalRoomList[which]);
 
-                builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initList(salle[0]));
+                builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initList(room[0]));
 
                 builderRoom.setNegativeButton("Reset", (dialog, whichButton) -> initList());
 
@@ -124,20 +118,21 @@ public class ListMeetingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initList(Date date){
+    private void initList(Date date) {
         mMeeting = mApiService.getMeeting();
         List<Meeting> mMeetingFiltered = new ArrayList<>();
         for (Meeting meeting : mMeeting) {
-            if (meeting.getDateStart().getDay()==date.getDay() && meeting.getDateStart().getMonth()==date.getMonth() && meeting.getDateStart().getYear()==date.getYear()) mMeetingFiltered.add(meeting);
+            if (meeting.getDateStart().getDay() == date.getDay() && meeting.getDateStart().getMonth() == date.getMonth() && meeting.getDateStart().getYear() == date.getYear())
+                mMeetingFiltered.add(meeting);
         }
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
     }
 
-    private void initList(String s) {
+    private void initList(String room) {
         mMeeting = mApiService.getMeeting();
         List<Meeting> mMeetingFiltered = new ArrayList<>();
         for (Meeting meeting : mMeeting) {
-            if (meeting.getRoom().equals(s)) mMeetingFiltered.add(meeting);
+            if (meeting.getRoom().equals(room)) mMeetingFiltered.add(meeting);
         }
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
     }

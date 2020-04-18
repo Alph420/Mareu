@@ -16,7 +16,6 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,7 +45,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     MultiAutoCompleteTextView mParticipant;
     Button mButtonSave;
 
-    MeetingApiService mApiService= DI.getMeetingApiService();;
+    MeetingApiService mApiService= DI.getMeetingApiService();
 
     final int color = DummyMeetingGenerator.generateColor();
     Calendar calendarStart = Calendar.getInstance();

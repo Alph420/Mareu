@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.mareu.R;
@@ -28,11 +29,11 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     private final List<Meeting> mMeetingList;
 
-    public MeetingListRecyclerViewAdapter(List<Meeting> MeetingList) {
+    MeetingListRecyclerViewAdapter(List<Meeting> MeetingList) {
         mMeetingList = MeetingList;
     }
 
-
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -44,7 +45,6 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Meeting meeting = mMeetingList.get(position);
-
         holder.mMeetingColor.setColorFilter(meeting.getColor());
         holder.mMeetingInfo.setText(meeting.getInfo());
         holder.mMeetingParticipants.setText(meeting.getParticipantsList());
@@ -67,8 +67,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         @BindView(R.id.item_list_participants)
         public TextView mMeetingParticipants;
 
-
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

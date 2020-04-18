@@ -3,15 +3,12 @@ package com.openclassrooms.mareu.service;
 import com.openclassrooms.mareu.model.Meeting;
 import com.openclassrooms.mareu.model.User;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 
 import static android.graphics.Color.rgb;
 
@@ -47,15 +44,13 @@ public class DummyMeetingGenerator {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 8);
         cal.set(Calendar.MINUTE, 0);
-        Date date = cal.getTime();
-        return date;
+        return cal.getTime();
     }
 
     private static Date generateEndMeeting() {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 9);
         cal.set(Calendar.MINUTE, 0);
-        Date date = cal.getTime();
-        return date;
+        return cal.getTime();
     }
 }
