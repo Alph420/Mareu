@@ -1,7 +1,7 @@
 package com.openclassrooms.mareu.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,10 +24,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ListMeetingActivity extends AppCompatActivity {
@@ -43,8 +47,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_filter_list_white_24dp));
-       mApiService = DI.getMeetingApiService();
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_filter_list_white_24dp));
+        mApiService = DI.getMeetingApiService();
 
         mRecyclerView = findViewById(R.id.meeting_list);
 
@@ -71,21 +75,71 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        List<String> salleList = Room.getSalle();
         switch (item.getItemId()) {
 
             case R.id.filterDate:
+                final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                DatePicker picker = new DatePicker(this);
+                picker.setCalendarViewShown(false);
+                builder1.setView(picker);
+
+
+                builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int year = picker.getYear();
+                        int mon = picker.getMonth();
+                        int day = picker.getDayOfMonth();
+                        Date date = new GregorianCalendar(year,mon,day).getTime();
+                        initList(date);
+                    }
+                });
+                builder1.setNegativeButton("Reset", (dialog, whichButton) -> initList());
+                builder1.show();
+
 
                 break;
 
             case R.id.filterLocation:
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-                mBuilder.setTitle("Salle");
+                List<String> salleList = Room.getSalle();
+                String[] salleArray = new String[salleList.size()];
+                salleArray = salleList.toArray(salleArray);
+                final String[] salle = new String[1];
+                final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
+                builderRoom.setTitle("Choisissez une Salle");
 
+                String[] finalSalleArray = salleArray;
 
-                break;
+                builderRoom.setSingleChoiceItems(salleArray,-1,
+                        (dialog, which) -> salle[0] = finalSalleArray[which]);
+
+                builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initList(salle[0]));
+
+                builderRoom.setNegativeButton("Reset", (dialog, whichButton) -> initList());
+
+                AlertDialog dialogRoom = builderRoom.create();
+
+                dialogRoom.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initList(Date date){
+        mMeeting = mApiService.getMeeting();
+        List<Meeting> mMeetingFiltered = new ArrayList<>();
+        for (Meeting meeting : mMeeting) {
+            if (meeting.getDateStart().getDay()==date.getDay() && meeting.getDateStart().getMonth()==date.getMonth() && meeting.getDateStart().getYear()==date.getYear()) mMeetingFiltered.add(meeting);
+        }
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
+    }
+
+    private void initList(String s) {
+        mMeeting = mApiService.getMeeting();
+        List<Meeting> mMeetingFiltered = new ArrayList<>();
+        for (Meeting meeting : mMeeting) {
+            if (meeting.getRoom().equals(s)) mMeetingFiltered.add(meeting);
+        }
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
     }
 
     private void initList() {

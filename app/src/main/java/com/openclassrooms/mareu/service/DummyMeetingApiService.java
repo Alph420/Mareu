@@ -29,19 +29,24 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
-    public boolean chekingMetting(Meeting meeting) {
+    public boolean checkingMetting(Meeting meeting) {
+
         List<Meeting> meetingAsTheSameDay = new ArrayList<>();
+        for (Meeting mMeetingAsTheSameDay : meetings) {
+            if (meeting.getDateStart().getDay() == mMeetingAsTheSameDay.getDateStart().getDay())
+                meetingAsTheSameDay.add(mMeetingAsTheSameDay);
+        }
+        if (meetingAsTheSameDay.size() == 0) return true;
+
         List<Meeting> meetingAsTheSameRoom = new ArrayList<>();
-        List<Meeting> meetingAsTheSameHoursStarting= new ArrayList<>();
-        List<Meeting> meetingAsTheSameHoursEnding= new ArrayList<>();
+        for (Meeting mMeetingAsTheSameRoom : meetingAsTheSameDay) {
+            if (meeting.getRoom().equals(mMeetingAsTheSameRoom.getRoom())) meetingAsTheSameRoom.add(mMeetingAsTheSameRoom);
+        }
 
-        Meeting meetingAsVerify = meeting;
-
-        //verifier si c la meme jour
-        //verifier la salle
-        //verifier la via une timeline
-        // trois condition
-
-        return true;
+        for (Meeting mMeeting : meetingAsTheSameRoom) {
+            if (meeting.getDateStart().before(mMeeting.getDateStart()) && meeting.getDateEnd().before(mMeeting.getDateStart())) return true;
+            if (meeting.getDateStart().after(mMeeting.getDateEnd()) && meeting.getDateEnd().after(mMeeting.getDateEnd())) return true;
+        }
+        return false;
     }
 }

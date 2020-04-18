@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -44,9 +46,11 @@ public class AddMeetingActivity extends AppCompatActivity {
     MultiAutoCompleteTextView mParticipant;
     Button mButtonSave;
 
-    MeetingApiService mApiService;
+    MeetingApiService mApiService= DI.getMeetingApiService();;
 
     final int color = DummyMeetingGenerator.generateColor();
+    Calendar calendarStart = Calendar.getInstance();
+    Calendar calendarEnd = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +58,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_meeting);
 
         //region RegionInstance
-        mApiService = DI.getMeetingApiService();
-        Calendar calendarStart = Calendar.getInstance();
-        Calendar calendarEnd = Calendar.getInstance();
-        Date dateStart = new Date();
-        Date dateEnd = new Date();
-
-
         mButtonBack = findViewById(R.id.buttonBack);
 
         mImageView = findViewById(R.id.color_meeting);
@@ -79,19 +76,9 @@ public class AddMeetingActivity extends AppCompatActivity {
         mParticipant = findViewById(R.id.participant);
         //endregion
 
-        mButtonBack.setOnClickListener(v -> {
-            Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
-            startActivity(intent);
-        });
-
+        mButtonBack.setOnClickListener(v -> startActivity(new Intent(AddMeetingActivity.this, ListMeetingActivity.class)));
         mImageView.setOnClickListener(v -> mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor()));
 
-        //region RegionDatePicker
-        int jour = mDateMeeting.getDayOfMonth();
-        int month = mDateMeeting.getMonth();
-        int year = mDateMeeting.getYear();
-        calendarStart.set(year, month, jour);
-        //endregion
 
         //region RegionSpinner
         List<String> area = Room.getSalle();
@@ -149,11 +136,22 @@ public class AddMeetingActivity extends AppCompatActivity {
         mButtonSave.setBackgroundColor(Color.RED);
         mButtonSave.setTextColor(Color.WHITE);
         mButtonSave.setOnClickListener(v -> {
+            TextView mErrorTextView = findViewById(R.id.text_error);
+
+            //region RegionDatePicker
+
+            int jour = mDateMeeting.getDayOfMonth();
+            int month = mDateMeeting.getMonth();
+            int year = mDateMeeting.getYear();
+            calendarStart.set(year, month, jour);
+            //endregion
 
             //region RegionTimerPicker
+            Date dateStart = calendarStart.getTime();
+            Date dateEnd = calendarStart.getTime();
+
             final int getHourStart;
             final int getMinuteStart;
-
             if (Build.VERSION.SDK_INT < 23) {
                 getHourStart = mDateMeetingStart.getCurrentHour();
                 getMinuteStart = mDateMeetingStart.getCurrentMinute();
@@ -168,12 +166,10 @@ public class AddMeetingActivity extends AppCompatActivity {
                 dateStart.setHours(getHourStart);
                 dateStart.setMinutes(getMinuteStart);
                 calendarStart.setTime(dateStart);
-
             }
 
             final int getHourEnd;
             final int getMinuteEnd;
-
             if (Build.VERSION.SDK_INT < 23) {
                 getHourEnd = mDateMeetingEnd.getCurrentHour();
                 getMinuteEnd = mDateMeetingEnd.getCurrentMinute();
@@ -190,20 +186,21 @@ public class AddMeetingActivity extends AppCompatActivity {
                 dateEnd.setMinutes(getMinuteEnd);
                 calendarEnd.setTime(dateEnd);
             }
-
-            //endregion
+                //endregion
 
             String[] participantsList = mParticipant.getText().toString().split("\n");
-            List<String> participantListMeeting = new ArrayList<String>();
 
-            participantListMeeting.addAll(Arrays.asList(participantsList));
+            List<String> participantListMeeting = new ArrayList<>(Arrays.asList(participantsList));
 
-            Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), mLocationMeeting.getSelectedItem().toString(),calendarStart.getTime(),calendarEnd.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
-            if (mApiService.chekingMetting(meeting)) {
+
+            Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), mLocationMeeting.getSelectedItem().toString(), calendarStart.getTime(), calendarEnd.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
+            if (mApiService.checkingMetting(meeting)) {
                 mApiService.createMeeting(meeting);
                 finish();
-            } else
-                Toast.makeText(this, mLocationMeeting.getSelectedItem().toString() + " non disponible a ce moment", Toast.LENGTH_LONG);
+            } else {
+                mErrorTextView.setText(getString(R.string.errorPart1) + " (" + mLocationMeeting.getSelectedItem().toString() + ") " + getString(R.string.errorPart2));
+                mErrorTextView.setVisibility(View.VISIBLE);
+            }
         });
         //endregion
     }

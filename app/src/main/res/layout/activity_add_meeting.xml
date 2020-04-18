@@ -36,7 +36,8 @@
                 android:id="@+id/color_meeting"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:background="@color/blue" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -50,14 +51,12 @@
 
             <DatePicker
                 android:id="@+id/date_meeting"
+                style="@style/date_picker_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                style="@style/date_picker_theme"
-                android:startYear="2020"
                 android:endYear="2100"
-                />
-
+                android:startYear="2020" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -73,8 +72,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/heure_de_debut"
                     android:textColor="@color/cyanBlue"
-                    android:textSize="20sp"
-                    />
+                    android:textSize="20sp" />
 
                 <TimePicker
                     android:id="@+id/date_meeting_start"
@@ -127,8 +125,7 @@
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                >
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/sujet_meeting"
@@ -158,15 +155,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/text_error"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="15sp"
+                android:visibility="invisible"
+                tools:text="Erreur" />
 
             <Button
                 android:id="@+id/save_meeting"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@color/cyanBlue"
                 android:text="@string/save" />
+
 
         </LinearLayout>
 

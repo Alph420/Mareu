@@ -7,4 +7,7 @@
     <string name="participants">Participants</string>
     <string name="save">Save</string>
     <string name="filtre">Filtre</string>
+    <string name="errorPart1"> Désolé, mais la salle sélectionnée</string>
+    <string name="errorPart2"> n\'est pas disponible à ce moment</string>
+
 </resources>

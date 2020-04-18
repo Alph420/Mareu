@@ -22,25 +22,16 @@ import static android.graphics.Color.rgb;
 public class DummyMeetingGenerator {
 
     private static int actualColor;
-    private static Date dateStartMetting;
-    private static Date dateEndMetting;
-
-    public static Date getDateStartMetting() {return dateStartMetting;}
-
-    public static Date getDateEndMetting() { return dateEndMetting; }
 
     public static int getActualColor() {
         return actualColor;
     }
 
-
-    private static Date date = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris")).getTime();
-
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(generateColor(), "Salle A", generateStartMeeting(),generateEndMeeting(), "Sujet 1", User.listParticipants),
-            new Meeting(generateColor(),"Salle B",generateStartMeeting(),generateEndMeeting(), "Sujet 2", User.listParticipants),
-            new Meeting(generateColor(),"Salle C",generateStartMeeting(),generateEndMeeting(), "Sujet 3", User.listParticipants),
-            new Meeting(generateColor(), "Salle E",generateStartMeeting(),generateEndMeeting(), "Sujet 4", User.listParticipants)
+            new Meeting(generateColor(), "Salle A", generateStartMeeting(), generateEndMeeting(), "Sujet 1", User.listParticipants),
+            new Meeting(generateColor(), "Salle B", generateStartMeeting(), generateEndMeeting(), "Sujet 2", User.listParticipants),
+            new Meeting(generateColor(), "Salle C", generateStartMeeting(), generateEndMeeting(), "Sujet 3", User.listParticipants),
+            new Meeting(generateColor(), "Salle D", generateStartMeeting(), generateEndMeeting(), "Sujet 4", User.listParticipants)
     );
 
     static List<Meeting> generateMeeting() {
@@ -52,28 +43,19 @@ public class DummyMeetingGenerator {
         return actualColor;
     }
 
-    public static Date generateStartMeeting(){
+    private static Date generateStartMeeting() {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY,8);
-        cal.set(Calendar.MINUTE,0);
-
+        cal.set(Calendar.HOUR_OF_DAY, 8);
+        cal.set(Calendar.MINUTE, 0);
         Date date = cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        System.out.println(dateFormat.format(date).replace(':','h'));//2016/11/16 12:08:43
-
         return date;
-
     }
 
-    public static Date generateEndMeeting(){
+    private static Date generateEndMeeting() {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY,9);
-        cal.set(Calendar.MINUTE,0);
-
+        cal.set(Calendar.HOUR_OF_DAY, 9);
+        cal.set(Calendar.MINUTE, 0);
         Date date = cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        System.out.println(dateFormat.format(date).replace(':','h'));//2016/11/16 12:08:43
-
         return date;
     }
 }
