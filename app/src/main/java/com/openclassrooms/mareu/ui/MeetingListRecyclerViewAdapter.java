@@ -36,14 +36,14 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.meeting_item, parent, false);
+                .inflate(R.layout.item_meeting, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder( ViewHolder holder, final int position) {
-         Meeting meeting = mMeetingList.get(position);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        Meeting meeting = mMeetingList.get(position);
 
         holder.mMeetingColor.setColorFilter(meeting.getColor());
         holder.mMeetingInfo.setText(meeting.getInfo());
@@ -71,7 +71,6 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-
         }
     }
 }

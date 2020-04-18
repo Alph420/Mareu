@@ -45,7 +45,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:text="Date de reunion"
-                android:textColor="@color/colorCyanBlue"
+                android:textColor="@color/cyanBlue"
                 android:textSize="20sp" />
 
             <DatePicker
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/heure_de_debut"
-                    android:textColor="@color/colorCyanBlue"
+                    android:textColor="@color/cyanBlue"
                     android:textSize="20sp"
                     />
 
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/heure_de_fin"
-                    android:textColor="@color/colorCyanBlue"
+                    android:textColor="@color/cyanBlue"
                     android:textSize="20sp" />
 
 
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:background="@color/colorCyanBlue"
+                android:background="@color/cyanBlue"
                 android:text="@string/save" />
 
         </LinearLayout>

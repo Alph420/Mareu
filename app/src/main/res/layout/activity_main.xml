@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        tools:listitem="@layout/meeting_item"
+        tools:listitem="@layout/item_meeting"
 
         >
 
@@ -40,6 +40,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add_white_24dp"
-        android:backgroundTint="@color/colorBlue"/>
+        android:backgroundTint="@color/red"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

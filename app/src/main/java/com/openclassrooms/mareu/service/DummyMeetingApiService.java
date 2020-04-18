@@ -37,26 +37,11 @@ public class DummyMeetingApiService implements MeetingApiService {
 
         Meeting meetingAsVerify = meeting;
 
+        //verifier si c la meme jour
+        //verifier la salle
+        //verifier la via une timeline
+        // trois condition
 
-        for (Meeting meetingToken :meetings) {
-                if (meetingToken.getDate().getDay() == meetingAsVerify.getDate().getDay() )meetingAsTheSameDay.add(meetingToken);
-        }
-
-        for (Meeting meetingToken:meetingAsTheSameDay) {
-            if(meetingToken.getRoom().equals(meetingAsVerify.getRoom()))meetingAsTheSameRoom.add(meetingToken);
-        }
-
-        for (Meeting meetingToken: meetingAsTheSameRoom) {
-            if (meetingToken.getHoursMeetingStart().equals(meetingAsVerify.getHoursMeetingStart()))meetingAsTheSameHoursStarting.add(meetingToken);
-        }
-
-        for (Meeting meetingToken: meetingAsTheSameHoursStarting) {
-            if (meetingToken.getHoursMeetingEnd().equals(meetingAsVerify.getHoursMeetingEnd()))meetingAsTheSameHoursEnding.add(meetingToken);
-        }
-
-        if (meetingAsTheSameHoursEnding.size()!=0) return false;
-        else return true;
-
-
+        return true;
     }
 }

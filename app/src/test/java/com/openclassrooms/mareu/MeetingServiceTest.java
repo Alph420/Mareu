@@ -13,6 +13,7 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import static org.junit.Assert.*;
@@ -36,8 +37,9 @@ public class MeetingServiceTest {
 
     @Test
     public void createMeetingWithSuccess() {
+        Date date = new Date();
         List<String> list = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting test = new Meeting(rgb(100,150,200), "14h30", "15h", "Test", "test",
+        Meeting test = new Meeting(rgb(100,150,200), "14h30", "15h", "Test",date, "test",
                 list);
         service.createMeeting(test);
         assertTrue(service.getMeeting().contains(test));

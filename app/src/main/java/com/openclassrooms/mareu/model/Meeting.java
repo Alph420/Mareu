@@ -1,5 +1,7 @@
 package com.openclassrooms.mareu.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,24 +13,33 @@ public class Meeting {
 
     private int color;
 
-    private String hoursMeetingStart;
-
-    private String hoursMeetingEnd;
 
     private String room;
 
-    private Date date;
+    private Date dateStart;
 
-    private String sujet;
+    private Date dateEnd;
+
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+
+    private String subject;
 
     private List<String> participantsList;
 
-    public Date getDate() {
-        return date;
+    public Date getDateStart() {
+        return dateStart;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
     }
 
     public int getColor() {
@@ -40,22 +51,6 @@ public class Meeting {
     }
 
 
-    public String getHoursMeetingStart() {
-        return hoursMeetingStart;
-    }
-
-    public void setHoursMeetingStart(String hoursMeetingStart) {
-        this.hoursMeetingStart = hoursMeetingStart;
-    }
-
-    public String getHoursMeetingEnd() {
-        return hoursMeetingEnd;
-    }
-
-    public void setHoursMeetingEnd(String hoursMeetingEnd) {
-        this.hoursMeetingEnd = hoursMeetingEnd;
-    }
-
     public String getRoom() {
         return room;
     }
@@ -64,12 +59,12 @@ public class Meeting {
         this.room = room;
     }
 
-    public String getSujet() {
-        return sujet;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setSujet(String sujet) {
-        this.sujet = sujet;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public String getParticipantsList() {
@@ -86,16 +81,20 @@ public class Meeting {
 
 
     public String getInfo() {
-        return this.getRoom() + " - " + this.getHoursMeetingStart() + " - " + this.getSujet();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        date.setHours( this.dateStart.getHours());
+        date.setMinutes(this.dateStart.getMinutes());
+
+        return this.getRoom() + " - " + dateFormat.format(date).replace(':','h') + " - " + this.getSubject();
     }
 
-    public Meeting(int color, String hoursMeetingStart, String hoursMeetingEnd, String room, Date date, String sujet, List<String> participantsList) {
+    public Meeting(int color, String room, Date dateStart, Date dateEnd, String subject, List<String> participantsList) {
         this.color = color;
-        this.hoursMeetingStart = hoursMeetingStart;
-        this.hoursMeetingEnd = hoursMeetingEnd;
         this.room = room;
-        this.date = date;
-        this.sujet = sujet;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.subject = subject;
         this.participantsList = participantsList;
     }
 }

@@ -1,13 +1,17 @@
 package com.openclassrooms.mareu.service;
 
 import com.openclassrooms.mareu.model.Meeting;
-import com.openclassrooms.mareu.model.Users;
+import com.openclassrooms.mareu.model.User;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.TimeZone;
 
 import static android.graphics.Color.rgb;
 
@@ -15,23 +19,28 @@ import static android.graphics.Color.rgb;
  * Created by Alph4 le 26/03/2020.
  * Projet: Mareu
  **/
-public abstract class DummyMeetingGenerator {
+public class DummyMeetingGenerator {
 
     private static int actualColor;
+    private static Date dateStartMetting;
+    private static Date dateEndMetting;
+
+    public static Date getDateStartMetting() {return dateStartMetting;}
+
+    public static Date getDateEndMetting() { return dateEndMetting; }
 
     public static int getActualColor() {
         return actualColor;
     }
 
-    private static String hoursMeeting = "08";
-    private static Date date = new Date();
 
+    private static Date date = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris")).getTime();
 
     public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(generateColor(), hoursMeeting+'h', "09h", "Salle A",date, "Sujet 1", Users.listParticipants),
-            new Meeting(generateColor(),hoursMeeting+'h', "09h", "Salle B",date, "Sujet 2", Users.listParticipants),
-            new Meeting(generateColor(),hoursMeeting+'h', "09h", "Salle C",date, "Sujet 3", Users.listParticipants),
-            new Meeting(generateColor(), hoursMeeting+'h', "09h", "Salle E",date, "Sujet 4", Users.listParticipants)
+            new Meeting(generateColor(), "Salle A", generateStartMeeting(),generateEndMeeting(), "Sujet 1", User.listParticipants),
+            new Meeting(generateColor(),"Salle B",generateStartMeeting(),generateEndMeeting(), "Sujet 2", User.listParticipants),
+            new Meeting(generateColor(),"Salle C",generateStartMeeting(),generateEndMeeting(), "Sujet 3", User.listParticipants),
+            new Meeting(generateColor(), "Salle E",generateStartMeeting(),generateEndMeeting(), "Sujet 4", User.listParticipants)
     );
 
     static List<Meeting> generateMeeting() {
@@ -41,5 +50,30 @@ public abstract class DummyMeetingGenerator {
     public static int generateColor() {
         actualColor = rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
         return actualColor;
+    }
+
+    public static Date generateStartMeeting(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,8);
+        cal.set(Calendar.MINUTE,0);
+
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        System.out.println(dateFormat.format(date).replace(':','h'));//2016/11/16 12:08:43
+
+        return date;
+
+    }
+
+    public static Date generateEndMeeting(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,9);
+        cal.set(Calendar.MINUTE,0);
+
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        System.out.println(dateFormat.format(date).replace(':','h'));//2016/11/16 12:08:43
+
+        return date;
     }
 }

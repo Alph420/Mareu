@@ -1,6 +1,7 @@
 package com.openclassrooms.mareu.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -8,12 +9,14 @@ import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.events.DeleteMeetingEvent;
 import com.openclassrooms.mareu.model.Meeting;
+import com.openclassrooms.mareu.model.Room;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,7 +43,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mApiService = DI.getMeetingApiService();
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_filter_list_white_24dp));
+       mApiService = DI.getMeetingApiService();
 
         mRecyclerView = findViewById(R.id.meeting_list);
 
@@ -67,6 +71,7 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        List<String> salleList = Room.getSalle();
         switch (item.getItemId()) {
 
             case R.id.filterDate:
@@ -74,6 +79,9 @@ public class ListMeetingActivity extends AppCompatActivity {
                 break;
 
             case R.id.filterLocation:
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+                mBuilder.setTitle("Salle");
+
 
                 break;
         }

@@ -21,14 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.openclassrooms.mareu.R;
 import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.model.Meeting;
-import com.openclassrooms.mareu.model.Users;
-import com.openclassrooms.mareu.model.Salle;
+import com.openclassrooms.mareu.model.User;
+import com.openclassrooms.mareu.model.Room;
 import com.openclassrooms.mareu.service.DummyMeetingGenerator;
 import com.openclassrooms.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -50,11 +51,14 @@ public class AddMeetingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_meeting_activity);
+        setContentView(R.layout.activity_add_meeting);
 
         //region RegionInstance
         mApiService = DI.getMeetingApiService();
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+        Date dateStart = new Date();
+        Date dateEnd = new Date();
 
 
         mButtonBack = findViewById(R.id.buttonBack);
@@ -86,11 +90,11 @@ public class AddMeetingActivity extends AppCompatActivity {
         int jour = mDateMeeting.getDayOfMonth();
         int month = mDateMeeting.getMonth();
         int year = mDateMeeting.getYear();
-        calendar.set(year, month, jour);
+        calendarStart.set(year, month, jour);
         //endregion
 
         //region RegionSpinner
-        List<String> area = Salle.getSalle();
+        List<String> area = Room.getSalle();
         ArrayAdapter<String> salleArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, area);
         mLocationMeeting.setDropDownHorizontalOffset(android.R.layout.simple_dropdown_item_1line);
         mLocationMeeting.setAdapter(salleArrayAdapter);
@@ -131,7 +135,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         //region RegionAutoCompleteView
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, Users.listParticipants);
+                android.R.layout.simple_dropdown_item_1line, User.listParticipants);
 
         mParticipant.setAdapter(adapter);
 
@@ -154,14 +158,17 @@ public class AddMeetingActivity extends AppCompatActivity {
                 getHourStart = mDateMeetingStart.getCurrentHour();
                 getMinuteStart = mDateMeetingStart.getCurrentMinute();
 
-                calendar.set(Calendar.HOUR_OF_DAY, mDateMeetingStart.getCurrentHour());
-                calendar.set(Calendar.MINUTE, mDateMeetingStart.getCurrentMinute());
+                dateStart.setHours(getHourStart);
+                dateStart.setMinutes(getMinuteStart);
+                calendarStart.setTime(dateStart);
             } else {
                 getHourStart = mDateMeetingStart.getHour();
                 getMinuteStart = mDateMeetingStart.getMinute();
 
-                calendar.set(Calendar.HOUR_OF_DAY, mDateMeetingStart.getHour());
-                calendar.set(Calendar.MINUTE, mDateMeetingStart.getMinute());
+                dateStart.setHours(getHourStart);
+                dateStart.setMinutes(getMinuteStart);
+                calendarStart.setTime(dateStart);
+
             }
 
             final int getHourEnd;
@@ -171,18 +178,19 @@ public class AddMeetingActivity extends AppCompatActivity {
                 getHourEnd = mDateMeetingEnd.getCurrentHour();
                 getMinuteEnd = mDateMeetingEnd.getCurrentMinute();
 
-                calendar.set(Calendar.HOUR_OF_DAY, mDateMeetingEnd.getCurrentHour());
-                calendar.set(Calendar.MINUTE, mDateMeetingEnd.getCurrentMinute());
+                dateEnd.setHours(getHourEnd);
+                dateEnd.setMinutes(getMinuteEnd);
+                calendarEnd.setTime(dateEnd);
+
             } else {
                 getHourEnd = mDateMeetingEnd.getHour();
                 getMinuteEnd = mDateMeetingEnd.getMinute();
 
-                calendar.set(Calendar.HOUR_OF_DAY, mDateMeetingEnd.getHour());
-                calendar.set(Calendar.MINUTE, mDateMeetingEnd.getMinute());
+                dateEnd.setHours(getHourEnd);
+                dateEnd.setMinutes(getMinuteEnd);
+                calendarEnd.setTime(dateEnd);
             }
 
-            String meetingTimeStart = String.valueOf(getHourStart) + 'h' + getMinuteStart;
-            String meetingTimeEnd = String.valueOf(getHourEnd) + 'h' + getMinuteEnd;
             //endregion
 
             String[] participantsList = mParticipant.getText().toString().split("\n");
@@ -190,7 +198,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
             participantListMeeting.addAll(Arrays.asList(participantsList));
 
-            Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), meetingTimeStart, meetingTimeEnd, mLocationMeeting.getSelectedItem().toString(), calendar.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
+            Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), mLocationMeeting.getSelectedItem().toString(),calendarStart.getTime(),calendarEnd.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
             if (mApiService.chekingMetting(meeting)) {
                 mApiService.createMeeting(meeting);
                 finish();
