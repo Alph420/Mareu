@@ -13,6 +13,7 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -37,10 +38,11 @@ public class MeetingServiceTest {
 
     @Test
     public void createMeetingWithSuccess() {
-        Date date = new Date();
+        Date dateStart = new Date();
+        Date dateEnd = new Date();
+
         List<String> list = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting test = new Meeting(rgb(100,150,200), "14h30", "15h", "Test",date, "test",
-                list);
+        Meeting test = new Meeting(rgb(100,150,200), "Salle A", dateStart,dateEnd, "test", list);
         service.createMeeting(test);
         assertTrue(service.getMeeting().contains(test));
     }
@@ -50,5 +52,32 @@ public class MeetingServiceTest {
         Meeting meetingToDelete = service.getMeeting().get(0);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeeting().contains(meetingToDelete));
+    }
+
+    @Test
+    public void checkingMeetingTest(){
+        //region meetingTrue
+        Date dateStartTrue = new Date();
+        Date dateEndTrue = new Date();
+
+        List<String> listTrue = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
+        Meeting testTrue = new Meeting(rgb(100,150,200), "Salle A", dateStartTrue,dateEndTrue, "test", listTrue);
+        assertTrue(service.checkingMetting(testTrue));
+
+        //endregion
+
+        //region meetingFalse
+        Calendar calStart = Calendar.getInstance();
+        calStart.set(Calendar.HOUR_OF_DAY, 8);
+        calStart.set(Calendar.MINUTE, 0);
+
+        Calendar calEnd = Calendar.getInstance();
+        calEnd.set(Calendar.HOUR_OF_DAY, 9);
+        calEnd.set(Calendar.MINUTE, 0);
+
+        List<String> listFalse = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
+        Meeting testFalse = new Meeting(rgb(100,150,200), "Salle A", calStart.getTime(),calEnd.getTime(), "test", listFalse);
+        assertFalse(service.checkingMetting(testFalse));
+        //endregion
     }
 }
