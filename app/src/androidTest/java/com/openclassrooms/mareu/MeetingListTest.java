@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule;
 import com.openclassrooms.mareu.ui.ListMeetingActivity;
 import com.openclassrooms.mareu.utils.DeleteViewAction;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +27,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 
 /**
@@ -37,17 +40,34 @@ import static org.hamcrest.Matchers.is;
  */
 @RunWith(AndroidJUnit4.class)
 public class MeetingListTest {
-    // This is fixed
-    private final int ITEMS_COUNT = 4;
+
+    private static int ITEMS_COUNT = 4;
 
     @Rule
-    public ActivityTestRule mActivityRule =
+    public ActivityTestRule<ListMeetingActivity> mActivityRule =
             new ActivityTestRule(ListMeetingActivity.class);
+
+    @Before
+    public void setUp() {
+        ListMeetingActivity activity = mActivityRule.getActivity();
+        assertThat(activity, notNullValue());
+    }
 
     @Test
     public void myMeetingList_shouldNotBeEmpty() {
         onView(ViewMatchers.withId(R.id.meeting_list))
                 .check(matches(hasMinimumChildCount(1)));
+    }
+
+    @Test
+    public void myMeetingList_deleteAction_shouldRemoveItem() {
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
+
+        onView(ViewMatchers.withId(R.id.meeting_list))
+                .perform(actionOnItemAtPosition(1, new DeleteViewAction()));
+
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT - 1)));
+
     }
 
     @Test
@@ -64,21 +84,11 @@ public class MeetingListTest {
 
         onView(allOf(withClassName(is("android.widget.NumberPicker$CustomEditText")), withText(dayOfMonthStr), isDisplayed())).perform(replaceText(String.valueOf(dayOfMonth + 7)));
 
-        onView(allOf(withId(R.id.sujet_meeting))).perform(scrollTo(), replaceText("test"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.sujet_meeting))).perform(scrollTo(), replaceText("testInstrumented"), closeSoftKeyboard());
 
         onView(allOf(withId(R.id.save_meeting), withText("Save"))).perform(scrollTo(), click());
 
-        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT + 1)));
-    }
-
-    @Test
-    public void myMeetingList_deleteAction_shouldRemoveItem() {
-        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
-
-        onView(ViewMatchers.withId(R.id.meeting_list))
-                .perform(actionOnItemAtPosition(1, new DeleteViewAction()));
-
-        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT - 1)));
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(isDisplayed()));
     }
 
 
