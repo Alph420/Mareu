@@ -1,8 +1,5 @@
 package com.openclassrooms.mareu;
 
-import android.view.View;
-
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
@@ -14,13 +11,23 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Calendar;
+
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 
 /**
@@ -31,29 +38,38 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 @RunWith(AndroidJUnit4.class)
 public class MeetingListTest {
     // This is fixed
-    private static int ITEMS_COUNT = 4;
+    private final int ITEMS_COUNT = 4;
 
     @Rule
-    public ActivityTestRule<ListMeetingActivity> mActivityRule =
+    public ActivityTestRule mActivityRule =
             new ActivityTestRule(ListMeetingActivity.class);
-
 
     @Test
     public void myMeetingList_shouldNotBeEmpty() {
-        // First scroll to the position that needs to be matched and click on it.
         onView(ViewMatchers.withId(R.id.meeting_list))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
     @Test
-    public void myAddingMeetingButton_workingSucess(){
+    public void myAddingMeetingButton_workingSucess() {
+        Calendar cal = Calendar.getInstance();
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        String dayOfMonthStr = String.valueOf(dayOfMonth);
+
         onView(ViewMatchers.withId(R.id.add_meeting))
                 .perform(click());
 
         onView(ViewMatchers.withId(R.id.color_meeting))
                 .check(matches(isDisplayed()));
-    }
 
+        onView(allOf(withClassName(is("android.widget.NumberPicker$CustomEditText")), withText(dayOfMonthStr), isDisplayed())).perform(replaceText(String.valueOf(dayOfMonth + 7)));
+
+        onView(allOf(withId(R.id.sujet_meeting))).perform(scrollTo(), replaceText("test"), closeSoftKeyboard());
+
+        onView(allOf(withId(R.id.save_meeting), withText("Save"))).perform(scrollTo(), click());
+
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT + 1)));
+    }
 
     @Test
     public void myMeetingList_deleteAction_shouldRemoveItem() {
@@ -62,6 +78,8 @@ public class MeetingListTest {
         onView(ViewMatchers.withId(R.id.meeting_list))
                 .perform(actionOnItemAtPosition(1, new DeleteViewAction()));
 
-        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT-1)));
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT - 1)));
     }
+
+
 }
