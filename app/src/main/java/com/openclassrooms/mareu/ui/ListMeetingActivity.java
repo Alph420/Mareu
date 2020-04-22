@@ -83,7 +83,6 @@ public class ListMeetingActivity extends AppCompatActivity {
                 picker.setCalendarViewShown(false);
                 builderDatePicker.setView(picker);
 
-
                 builderDatePicker.setPositiveButton("OK", (dialog, which) -> {
                     int year = picker.getYear();
                     int mon = picker.getMonth();
@@ -118,6 +117,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //region RegionInitList
     private void initList(Date date) {
         mMeeting = mApiService.getMeeting();
         List<Meeting> mMeetingFiltered = new ArrayList<>();
@@ -141,6 +141,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         mMeeting = mApiService.getMeeting();
         mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
     }
+    //endregion
 
     //region RegionOverride
     @Override
