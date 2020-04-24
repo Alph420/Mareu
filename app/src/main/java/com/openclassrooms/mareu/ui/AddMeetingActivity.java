@@ -30,7 +30,6 @@ import com.openclassrooms.mareu.service.MeetingApiService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class AddMeetingActivity extends AppCompatActivity {
@@ -45,7 +44,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     MultiAutoCompleteTextView mParticipant;
     Button mButtonSave;
 
-    MeetingApiService mApiService= DI.getMeetingApiService();
+    MeetingApiService mApiService = DI.getMeetingApiService();
 
     final int color = DummyMeetingGenerator.generateColor();
     Calendar calendarStart = Calendar.getInstance();
@@ -116,7 +115,6 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-
         //endregion
 
         //region RegionAutoCompleteView
@@ -138,33 +136,27 @@ public class AddMeetingActivity extends AppCompatActivity {
             TextView mErrorTextView = findViewById(R.id.text_error);
 
             //region RegionDatePicker
-
-            int jour = mDateMeeting.getDayOfMonth();
+            int day = mDateMeeting.getDayOfMonth();
             int month = mDateMeeting.getMonth();
             int year = mDateMeeting.getYear();
-            calendarStart.set(year, month, jour);
+            calendarStart.set(year, month, day);
             //endregion
 
             //region RegionTimerPicker
-            Date dateStart = calendarStart.getTime();
-            Date dateEnd = calendarStart.getTime();
-
             final int getHourStart;
             final int getMinuteStart;
             if (Build.VERSION.SDK_INT < 23) {
                 getHourStart = mDateMeetingStart.getCurrentHour();
                 getMinuteStart = mDateMeetingStart.getCurrentMinute();
 
-                dateStart.setHours(getHourStart);
-                dateStart.setMinutes(getMinuteStart);
-                calendarStart.setTime(dateStart);
+                calendarStart.set(Calendar.HOUR_OF_DAY, getHourStart);
+                calendarStart.set(Calendar.MINUTE, getMinuteStart);
             } else {
                 getHourStart = mDateMeetingStart.getHour();
                 getMinuteStart = mDateMeetingStart.getMinute();
 
-                dateStart.setHours(getHourStart);
-                dateStart.setMinutes(getMinuteStart);
-                calendarStart.setTime(dateStart);
+                calendarStart.set(Calendar.HOUR_OF_DAY, getHourStart);
+                calendarStart.set(Calendar.MINUTE, getMinuteStart);
             }
 
             final int getHourEnd;
@@ -173,19 +165,16 @@ public class AddMeetingActivity extends AppCompatActivity {
                 getHourEnd = mDateMeetingEnd.getCurrentHour();
                 getMinuteEnd = mDateMeetingEnd.getCurrentMinute();
 
-                dateEnd.setHours(getHourEnd);
-                dateEnd.setMinutes(getMinuteEnd);
-                calendarEnd.setTime(dateEnd);
-
+                calendarEnd.set(Calendar.HOUR_OF_DAY, getHourEnd);
+                calendarEnd.set(Calendar.MINUTE, getMinuteEnd);
             } else {
                 getHourEnd = mDateMeetingEnd.getHour();
                 getMinuteEnd = mDateMeetingEnd.getMinute();
 
-                dateEnd.setHours(getHourEnd);
-                dateEnd.setMinutes(getMinuteEnd);
-                calendarEnd.setTime(dateEnd);
+                calendarEnd.set(Calendar.HOUR_OF_DAY, getHourEnd);
+                calendarEnd.set(Calendar.MINUTE, getMinuteEnd);
             }
-                //endregion
+            //endregion
 
             String[] participantsList = mParticipant.getText().toString().split("\n");
 
@@ -193,11 +182,12 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
             Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), mLocationMeeting.getSelectedItem().toString(), calendarStart.getTime(), calendarEnd.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
-            if (mApiService.checkingMetting(meeting)) {
+            if (mApiService.checkingMeeting(meeting)) {
                 mApiService.createMeeting(meeting);
                 finish();
             } else {
-                mErrorTextView.setText(getString(R.string.errorPart1) + " (" + mLocationMeeting.getSelectedItem().toString() + ") " + getString(R.string.errorPart2));
+                String error = String.format(getApplicationContext().getString(R.string.error_msg), mLocationMeeting.getSelectedItem().toString());
+                mErrorTextView.setText(error);
                 mErrorTextView.setVisibility(View.VISIBLE);
             }
         });

@@ -7,7 +7,8 @@
     <string name="participants">Participants</string>
     <string name="save">Save</string>
     <string name="filtre">Filtre</string>
-    <string name="errorPart1"> Désolé, mais la salle sélectionnée</string>
-    <string name="errorPart2"> n\'est pas disponible à ce moment</string>
+    <string name="error_msg">Désolé, mais la salle sélectionnée, %1$s n\'est pas disponible à ce moment</string>
+    <string name="date_de_reunion">Date de reunion</string>
+    <string name="color_meeting">Color Meeting</string>
 
 </resources>

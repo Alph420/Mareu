@@ -12,15 +12,15 @@ public class Room {
 
     private String name;
 
-    public Room(String roomName) {
+    private Room(String roomName) {
         this.name = roomName;
     }
 
-    public String getRoomName() {
+    private String getRoomName() {
         return name;
     }
 
-    static List<Room> sListRooms = Arrays.asList(
+    private static List<Room> ListRooms = Arrays.asList(
             new Room("Salle A"),
             new Room("Salle B"),
             new Room("Salle C"),
@@ -28,10 +28,10 @@ public class Room {
     );
 
     static public List<String> getSalle() {
-        List<String> listSalle = new ArrayList<>();
-        for (Room room : sListRooms) {
-            listSalle.add(room.getRoomName());
+        List<String> roomList = new ArrayList<>();
+        for (Room room : ListRooms) {
+            roomList.add(room.getRoomName());
         }
-        return listSalle;
+        return roomList;
     }
 }

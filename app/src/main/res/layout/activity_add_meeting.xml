@@ -37,7 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/blue" />
+                android:background="@color/blue"
+                android:contentDescription="@string/color_meeting" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
-                android:text="Date de reunion"
+                android:text="@string/date_de_reunion"
                 android:textColor="@color/cyanBlue"
                 android:textSize="20sp" />
 
@@ -136,7 +137,8 @@
                     android:hint="@string/sujet"
                     android:inputType="textMultiLine"
                     android:lines="1"
-                    android:minLines="1" />
+                    android:minLines="1"
+                    android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

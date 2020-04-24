@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Alph4 le 26/03/2020.
@@ -27,7 +28,9 @@ public class Meeting {
 
     private List<String> participantsList;
 
-    public Date getDateStart() { return dateStart; }
+    public Date getDateStart() {
+        return dateStart;
+    }
 
     public int getColor() {
         return color;
@@ -41,25 +44,21 @@ public class Meeting {
         return room;
     }
 
-    public String getSubject() {
+    private String getSubject() {
         return subject;
     }
 
     public String getParticipantsList() {
-        String participants = "";
+        StringBuilder participants = new StringBuilder();
         for (String participant : participantsList) {
-            participants += participant + ", ";
+            participants.append(participant).append(", ");
         }
-        return participants;
+        return participants.toString();
     }
 
     public String getInfo() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date date = new Date();
-        date.setHours(this.dateStart.getHours());
-        date.setMinutes(this.dateStart.getMinutes());
-
-        return this.getRoom() + " - " + dateFormat.format(date.getTime()).replace(':', 'h') + " - " + this.getSubject();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.FRANCE);
+        return this.getRoom() + " - " + dateFormat.format(dateStart).replace(':', 'h') + " - " + this.getSubject();
     }
 
     public Meeting(int color, String room, Date dateStart, Date dateEnd, String subject, List<String> participantsList) {

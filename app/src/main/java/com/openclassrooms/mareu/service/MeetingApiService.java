@@ -2,6 +2,8 @@ package com.openclassrooms.mareu.service;
 
 import com.openclassrooms.mareu.model.Meeting;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +18,10 @@ public interface MeetingApiService {
 
     void deleteMeeting(Meeting meeting);
 
-    boolean checkingMetting(Meeting meeting);
+    boolean checkingMeeting(Meeting meeting);
+
+    List<Meeting> getMeetingDateFilter(Date date);
+
+    List<Meeting> getMeetingRoomFilter(String room);
 
 }

@@ -1,6 +1,5 @@
 package com.openclassrooms.mareu.ui;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -30,6 +29,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -119,22 +119,11 @@ public class ListMeetingActivity extends AppCompatActivity {
 
     //region RegionInitList
     private void initList(Date date) {
-        mMeeting = mApiService.getMeeting();
-        List<Meeting> mMeetingFiltered = new ArrayList<>();
-        for (Meeting meeting : mMeeting) {
-            if (meeting.getDateStart().getDay() == date.getDay() && meeting.getDateStart().getMonth() == date.getMonth() && meeting.getDateStart().getYear() == date.getYear())
-                mMeetingFiltered.add(meeting);
-        }
-        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mApiService.getMeetingDateFilter(date)));
     }
 
     private void initList(String room) {
-        mMeeting = mApiService.getMeeting();
-        List<Meeting> mMeetingFiltered = new ArrayList<>();
-        for (Meeting meeting : mMeeting) {
-            if (meeting.getRoom().equals(room)) mMeetingFiltered.add(meeting);
-        }
-        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeetingFiltered));
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mApiService.getMeetingRoomFilter(room)));
     }
 
     private void initList() {

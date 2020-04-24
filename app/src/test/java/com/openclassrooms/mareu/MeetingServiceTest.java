@@ -1,24 +1,25 @@
 package com.openclassrooms.mareu;
 
-import org.junit.Before;
-import org.junit.Test;
+        import org.junit.Before;
+        import org.junit.Test;
 
-import com.openclassrooms.mareu.di.DI;
-import com.openclassrooms.mareu.model.Meeting;
+        import com.openclassrooms.mareu.di.DI;
+        import com.openclassrooms.mareu.model.Meeting;
 
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+        import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 
-import com.openclassrooms.mareu.service.DummyMeetingGenerator;
-import com.openclassrooms.mareu.service.MeetingApiService;
+        import com.openclassrooms.mareu.service.DummyMeetingGenerator;
+        import com.openclassrooms.mareu.service.MeetingApiService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import static org.junit.Assert.*;
-import static android.graphics.Color.rgb;
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.Calendar;
+        import java.util.Date;
+        import java.util.List;
+        import java.util.Objects;
+
+        import static org.junit.Assert.*;
+        import static android.graphics.Color.rgb;
 
 
 public class MeetingServiceTest {
@@ -41,8 +42,8 @@ public class MeetingServiceTest {
         Date dateStart = new Date();
         Date dateEnd = new Date();
 
-        List<String> list = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting test = new Meeting(rgb(100,150,200), "Salle A", dateStart,dateEnd, "test", list);
+        List<String> list = new ArrayList<>(Arrays.asList("1@1.1", "2@2.2"));
+        Meeting test = new Meeting(rgb(100, 150, 200), "Salle A", dateStart, dateEnd, "test", list);
         service.createMeeting(test);
         assertTrue(service.getMeeting().contains(test));
     }
@@ -55,14 +56,14 @@ public class MeetingServiceTest {
     }
 
     @Test
-    public void checkingMeetingTest(){
+    public void checkingMeetingTest() {
         //region meetingTrue
         Date dateStartTrue = new Date();
         Date dateEndTrue = new Date();
 
-        List<String> listTrue = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting testTrue = new Meeting(rgb(100,150,200), "Salle A", dateStartTrue,dateEndTrue, "test", listTrue);
-        assertTrue(service.checkingMetting(testTrue));
+        List<String> listTrue = new ArrayList<>(Arrays.asList("1@1.1", "2@2.2"));
+        Meeting testTrue = new Meeting(rgb(100, 150, 200), "Salle A", dateStartTrue, dateEndTrue, "test", listTrue);
+        assertTrue(service.checkingMeeting(testTrue));
 
         //endregion
 
@@ -75,9 +76,32 @@ public class MeetingServiceTest {
         calEnd.set(Calendar.HOUR_OF_DAY, 9);
         calEnd.set(Calendar.MINUTE, 0);
 
-        List<String> listFalse = new ArrayList<String>(Arrays.asList("1@1.1", "2@2.2"));
-        Meeting testFalse = new Meeting(rgb(100,150,200), "Salle A", calStart.getTime(),calEnd.getTime(), "test", listFalse);
-        assertFalse(service.checkingMetting(testFalse));
+        List<String> listFalse = new ArrayList<>(Arrays.asList("1@1.1", "2@2.2"));
+        Meeting testFalse = new Meeting(rgb(100, 150, 200), "Salle A", calStart.getTime(), calEnd.getTime(), "test", listFalse);
+        assertFalse(service.checkingMeeting(testFalse));
         //endregion
+    }
+
+    @Test
+    public void checkingDateFilter() {
+        List<String> list = new ArrayList<>(Arrays.asList("1@1.1", "2@2.2"));
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 1);
+        Meeting test = new Meeting(rgb(100, 150, 200), "Salle A", cal.getTime(), cal.getTime(), "test", list);
+        service.createMeeting(test);
+
+        assertTrue(service.getMeetingDateFilter(cal.getTime()).contains(test));
+
+    }
+
+    @Test
+    public void checkingRoomFilter() {
+        List<String> list = new ArrayList<>(Arrays.asList("1@1.1", "2@2.2"));
+        Calendar cal = Calendar.getInstance();
+        Meeting test = new Meeting(rgb(100, 150, 200), "Salle A", cal.getTime(), cal.getTime(), "test", list);
+        service.createMeeting(test);
+
+        assertEquals(2, service.getMeetingRoomFilter("Salle A").size());
+
     }
 }

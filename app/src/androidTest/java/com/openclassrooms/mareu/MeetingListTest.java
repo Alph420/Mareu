@@ -4,6 +4,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
+import com.openclassrooms.mareu.di.DI;
 import com.openclassrooms.mareu.ui.ListMeetingActivity;
 import com.openclassrooms.mareu.utils.DeleteViewAction;
 
@@ -41,8 +42,6 @@ import static org.hamcrest.Matchers.notNullValue;
 @RunWith(AndroidJUnit4.class)
 public class MeetingListTest {
 
-    private static int ITEMS_COUNT = 4;
-
     @Rule
     public ActivityTestRule<ListMeetingActivity> mActivityRule =
             new ActivityTestRule(ListMeetingActivity.class);
@@ -61,6 +60,7 @@ public class MeetingListTest {
 
     @Test
     public void myMeetingList_deleteAction_shouldRemoveItem() {
+        int ITEMS_COUNT = 4;
         onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(ITEMS_COUNT)));
 
         onView(ViewMatchers.withId(R.id.meeting_list))
@@ -72,6 +72,10 @@ public class MeetingListTest {
 
     @Test
     public void myAddingMeetingButton_workingSucess() {
+        int meetingCount = DI.getMeetingApiService().getMeeting().size();
+
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(meetingCount)));
+
         Calendar cal = Calendar.getInstance();
         int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
         String dayOfMonthStr = String.valueOf(dayOfMonth);
@@ -84,11 +88,13 @@ public class MeetingListTest {
 
         onView(allOf(withClassName(is("android.widget.NumberPicker$CustomEditText")), withText(dayOfMonthStr), isDisplayed())).perform(replaceText(String.valueOf(dayOfMonth + 7)));
 
-        onView(allOf(withId(R.id.sujet_meeting))).perform(scrollTo(), replaceText("testInstrumented"), closeSoftKeyboard());
+        onView(withId(R.id.sujet_meeting)).perform(scrollTo(), replaceText("testInstrumented"), closeSoftKeyboard());
 
         onView(allOf(withId(R.id.save_meeting), withText("Save"))).perform(scrollTo(), click());
 
         onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(isDisplayed()));
+
+        onView(ViewMatchers.withId(R.id.meeting_list)).check(matches(hasChildCount(meetingCount + 1)));
     }
 
 
