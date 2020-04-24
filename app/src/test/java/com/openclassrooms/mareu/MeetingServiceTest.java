@@ -1,25 +1,25 @@
 package com.openclassrooms.mareu;
 
-        import org.junit.Before;
-        import org.junit.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-        import com.openclassrooms.mareu.di.DI;
-        import com.openclassrooms.mareu.model.Meeting;
+import com.openclassrooms.mareu.di.DI;
+import com.openclassrooms.mareu.model.Meeting;
 
-        import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 
-        import com.openclassrooms.mareu.service.DummyMeetingGenerator;
-        import com.openclassrooms.mareu.service.MeetingApiService;
+import com.openclassrooms.mareu.service.DummyMeetingGenerator;
+import com.openclassrooms.mareu.service.MeetingApiService;
 
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.Calendar;
-        import java.util.Date;
-        import java.util.List;
-        import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-        import static org.junit.Assert.*;
-        import static android.graphics.Color.rgb;
+import static org.junit.Assert.*;
+import static android.graphics.Color.rgb;
 
 
 public class MeetingServiceTest {
