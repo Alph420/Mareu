@@ -123,7 +123,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         mParticipant.setAdapter(adapter);
 
-
         mParticipant.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
         //endregion
 

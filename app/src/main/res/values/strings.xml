@@ -10,5 +10,7 @@
     <string name="error_msg">Désolé, mais la salle sélectionnée, %1$s n\'est pas disponible à ce moment</string>
     <string name="date_de_reunion">Date de reunion</string>
     <string name="color_meeting">Color Meeting</string>
+    <string name="par_date">Par date</string>
+    <string name="par_salle">Par Salle</string>
 
 </resources>
