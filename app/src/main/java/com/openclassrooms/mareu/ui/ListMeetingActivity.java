@@ -85,7 +85,6 @@ public class ListMeetingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public void filterDate() {
         final AlertDialog.Builder builderDatePicker = new AlertDialog.Builder(this);
         DatePicker picker = new DatePicker(this);

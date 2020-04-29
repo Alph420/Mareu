@@ -1,6 +1,5 @@
 package com.openclassrooms.mareu.ui;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,7 +48,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     final int color = DummyMeetingGenerator.generateColor();
     Calendar calendarStart = Calendar.getInstance();
     Calendar calendarEnd = Calendar.getInstance();
-
 
     public void instanceObject() {
         mButtonBack = findViewById(R.id.buttonBack);
