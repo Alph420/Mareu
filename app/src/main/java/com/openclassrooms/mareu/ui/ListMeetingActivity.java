@@ -28,8 +28,6 @@ import android.widget.DatePicker;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -78,43 +76,52 @@ public class ListMeetingActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.filterDate:
-                final AlertDialog.Builder builderDatePicker = new AlertDialog.Builder(this);
-                DatePicker picker = new DatePicker(this);
-                picker.setCalendarViewShown(false);
-                builderDatePicker.setView(picker);
-
-                builderDatePicker.setPositiveButton("OK", (dialog, which) -> {
-                    int year = picker.getYear();
-                    int mon = picker.getMonth();
-                    int day = picker.getDayOfMonth();
-                    Date date = new GregorianCalendar(year, mon, day).getTime();
-                    initList(date);
-                });
-                builderDatePicker.setNegativeButton("Reset", (dialog, whichButton) -> initList());
-                builderDatePicker.show();
+                filterDate();
                 break;
 
             case R.id.filterLocation:
-                List<String> roomList = Room.getSalle();
-                String[] roomArray = new String[roomList.size()];
-                roomArray = roomList.toArray(roomArray);
-                final String[] room = new String[1];
-                final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
-                builderRoom.setTitle("Choisissez une Salle");
-
-                String[] finalRoomList = roomArray;
-
-                builderRoom.setSingleChoiceItems(roomArray, -1, (dialog, which) -> room[0] = finalRoomList[which]);
-
-                builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initList(room[0]));
-
-                builderRoom.setNegativeButton("Reset", (dialog, whichButton) -> initList());
-
-                AlertDialog dialogRoom = builderRoom.create();
-
-                dialogRoom.show();
+                filterRoom();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void filterDate(){
+        final AlertDialog.Builder builderDatePicker = new AlertDialog.Builder(this);
+        DatePicker picker = new DatePicker(this);
+        picker.setCalendarViewShown(false);
+        builderDatePicker.setView(picker);
+
+        builderDatePicker.setPositiveButton("OK", (dialog, which) -> {
+            int year = picker.getYear();
+            int mon = picker.getMonth();
+            int day = picker.getDayOfMonth();
+            Date date = new GregorianCalendar(year, mon, day).getTime();
+            initList(date);
+        });
+        builderDatePicker.setNegativeButton("Reset", (dialog, whichButton) -> initList());
+        builderDatePicker.show();
+    }
+    public void filterRoom(){
+        List<String> roomList = Room.getSalle();
+        String[] roomArray = new String[roomList.size()];
+        roomArray = roomList.toArray(roomArray);
+        final String[] room = new String[1];
+        final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
+        builderRoom.setTitle("Choisissez une Salle");
+
+        String[] finalRoomList = roomArray;
+
+        builderRoom.setSingleChoiceItems(roomArray, -1, (dialog, which) -> room[0] = finalRoomList[which]);
+
+        builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initList(room[0]));
+
+        builderRoom.setNegativeButton("Reset", (dialog, whichButton) -> initList());
+
+        AlertDialog dialogRoom = builderRoom.create();
+
+        dialogRoom.show();
     }
 
     //region RegionInitList
@@ -127,8 +134,7 @@ public class ListMeetingActivity extends AppCompatActivity {
     }
 
     private void initList() {
-        mMeeting = mApiService.getMeeting();
-        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mMeeting));
+        mRecyclerView.setAdapter(new MeetingListRecyclerViewAdapter(mApiService.getMeeting()));
     }
     //endregion
 

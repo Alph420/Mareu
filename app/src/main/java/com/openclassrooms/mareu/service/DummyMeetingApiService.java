@@ -53,8 +53,10 @@ public class DummyMeetingApiService implements MeetingApiService {
         }
 
         for (Meeting mMeeting : meetingAsTheSameRoom) {
+
             if (meeting.getDateStart().before(mMeeting.getDateStart()) && meeting.getDateEnd().before(mMeeting.getDateStart()))
                 return true;
+
             if (meeting.getDateStart().after(mMeeting.getDateEnd()) && meeting.getDateEnd().after(mMeeting.getDateEnd()))
                 return true;
         }

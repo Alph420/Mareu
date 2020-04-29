@@ -50,12 +50,8 @@ public class AddMeetingActivity extends AppCompatActivity {
     Calendar calendarStart = Calendar.getInstance();
     Calendar calendarEnd = Calendar.getInstance();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_meeting);
 
-        //region RegionInstance
+    public void instanceObject(){
         mButtonBack = findViewById(R.id.buttonBack);
 
         mImageView = findViewById(R.id.color_meeting);
@@ -72,49 +68,24 @@ public class AddMeetingActivity extends AppCompatActivity {
         mLocationMeeting = findViewById(R.id.location_meeting);
         mSujet_meeting = findViewById(R.id.sujet_meeting);
         mParticipant = findViewById(R.id.participant);
-        //endregion
+    }
 
-        mButtonBack.setOnClickListener(v -> startActivity(new Intent(AddMeetingActivity.this, ListMeetingActivity.class)));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_meeting);
+
+        instanceObject();
+        mButtonBack.setOnClickListener(v -> finish());
         mImageView.setOnClickListener(v -> mImageView.setBackgroundColor(DummyMeetingGenerator.generateColor()));
 
+        onTextChanged();
 
         //region RegionSpinner
         List<String> area = Room.getSalle();
         ArrayAdapter<String> salleArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, area);
         mLocationMeeting.setDropDownHorizontalOffset(android.R.layout.simple_dropdown_item_1line);
         mLocationMeeting.setAdapter(salleArrayAdapter);
-        //endregion
-
-        //region RegionVerifyContentSujet
-        mSujet_meeting.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (s.length() == 0) {
-                    mSujet_meeting.setBackgroundColor(Color.RED);
-                    mSujet_meeting.setAlpha((float) 0.5);
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() >= 4 && !s.toString().equals("         ")) {
-                    mSujet_meeting.setBackgroundColor(Color.WHITE);
-                    mSujet_meeting.setAlpha((float) 1);
-                    mButtonSave.setEnabled(true);
-                    mButtonSave.setBackgroundColor(Color.CYAN);
-                }
-                if (s.length() < 4) {
-                    mSujet_meeting.setBackgroundColor(Color.RED);
-                    mSujet_meeting.setAlpha((float) 0.5);
-                    mButtonSave.setEnabled(false);
-                    mButtonSave.setBackgroundColor(Color.RED);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
         //endregion
 
         //region RegionAutoCompleteView
@@ -179,7 +150,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
             List<String> participantListMeeting = new ArrayList<>(Arrays.asList(participantsList));
 
-
             Meeting meeting = new Meeting(DummyMeetingGenerator.getActualColor(), mLocationMeeting.getSelectedItem().toString(), calendarStart.getTime(), calendarEnd.getTime(), mSujet_meeting.getText().toString(), participantListMeeting);
             if (mApiService.checkingMeeting(meeting)) {
                 mApiService.createMeeting(meeting);
@@ -191,5 +161,37 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         });
         //endregion
+    }
+
+    public void onTextChanged(){
+        mSujet_meeting.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                if (s.length() == 0) {
+                    mSujet_meeting.setBackgroundColor(Color.RED);
+                    mSujet_meeting.setAlpha((float) 0.5);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() >= 4 && !s.toString().equals("         ")) {
+                    mSujet_meeting.setBackgroundColor(Color.WHITE);
+                    mSujet_meeting.setAlpha((float) 1);
+                    mButtonSave.setEnabled(true);
+                    mButtonSave.setBackgroundColor(Color.CYAN);
+                }
+                if (s.length() < 4) {
+                    mSujet_meeting.setBackgroundColor(Color.RED);
+                    mSujet_meeting.setAlpha((float) 0.5);
+                    mButtonSave.setEnabled(false);
+                    mButtonSave.setBackgroundColor(Color.RED);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 }
