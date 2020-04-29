@@ -51,7 +51,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     Calendar calendarEnd = Calendar.getInstance();
 
 
-    public void instanceObject(){
+    public void instanceObject() {
         mButtonBack = findViewById(R.id.buttonBack);
 
         mImageView = findViewById(R.id.color_meeting);
@@ -163,7 +163,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         //endregion
     }
 
-    public void onTextChanged(){
+    public void onTextChanged() {
         mSujet_meeting.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -192,6 +192,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
             }
+
         });
     }
 }

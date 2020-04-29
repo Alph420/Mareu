@@ -74,7 +74,6 @@ public class ListMeetingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.filterDate:
                 filterDate();
                 break;
@@ -87,7 +86,7 @@ public class ListMeetingActivity extends AppCompatActivity {
     }
 
 
-    public void filterDate(){
+    public void filterDate() {
         final AlertDialog.Builder builderDatePicker = new AlertDialog.Builder(this);
         DatePicker picker = new DatePicker(this);
         picker.setCalendarViewShown(false);
@@ -103,7 +102,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         builderDatePicker.setNegativeButton("Reset", (dialog, whichButton) -> initList());
         builderDatePicker.show();
     }
-    public void filterRoom(){
+
+    public void filterRoom() {
         List<String> roomList = Room.getSalle();
         String[] roomArray = new String[roomList.size()];
         roomArray = roomList.toArray(roomArray);
